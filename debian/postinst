@@ -1,0 +1,7 @@
+#!/bin/bash
+
+ln -sv /sbin/openrc-init /sbin/init
+
+rc-update -u
+
+exit 0

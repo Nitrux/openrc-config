@@ -1,0 +1,5 @@
+openrc-config (0.0.1)  nitrux; urgency=medium
+
+  * Create package
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Fri, 12 Jun 2020 16:11:00 -0500

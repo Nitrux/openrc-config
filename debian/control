@@ -1,0 +1,16 @@
+Source: openrc-config
+Section: misc
+Priority: optional
+Maintainer: Uri Herrera <uri_herrera@nxos.org>
+Build-Depends: debhelper (>=9)
+Standards-Version: 3.9.6
+Homepage: http://nxos.org
+
+
+Package: openrc-config
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, openrc, sysvinit-utils
+Description: Package to add runlevel configuration for OpenRC.
+ This package will add the boot scripts to the runlevel
+ directories used by OpenRC to boot the system.
+
