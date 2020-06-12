@@ -1,0 +1,2 @@
+# openrc-config
+OpenRC Confirgutation
