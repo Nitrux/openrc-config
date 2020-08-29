@@ -1,3 +1,9 @@
+openrc-config (0.0.4)  nitrux; urgency=medium
+
+  * Remove refs to non-existent boot scripts.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Sat, 29 Aug 2020 16:53:00 -0500
+ 
 openrc-config (0.0.3)  nitrux; urgency=medium
 
   * Remove refs to non-existent boot scripts.
