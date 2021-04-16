@@ -1,6 +1,6 @@
 Source: openrc-config
 Section: misc
-Priority: optional
+Priority: required
 Maintainer: Uri Herrera <uri_herrera@nxos.org>
 Build-Depends: debhelper (>=9)
 Standards-Version: 3.9.6
