@@ -2,6 +2,6 @@
 
 ln -sv /sbin/openrc-init /sbin/init
 ln -av /usr/sbin/poweroff /sbin/poweroff
-ln -av /usr/sbin/reboot /sbin/reboot
+ln -sv /usr/sbin/reboot /sbin/reboot
 
 rc-update -u

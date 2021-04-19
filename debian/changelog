@@ -1,6 +1,12 @@
+openrc-config (0.0.6)  nitrux; urgency=medium
+
+  * Fix typo.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Mon, 19 Apr 2021 01:59:00 -0500
+
 openrc-config (0.0.5)  nitrux; urgency=medium
 
-  * Add links for poweroff and reboot commands
+  * Add links for poweroff and reboot commands.
 
  -- Uri Herrera <uri_herrera@nxos.org>  Fri, 16 Apr 2021 15:57:00 -0500
 
