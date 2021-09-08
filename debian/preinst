@@ -2,7 +2,7 @@
 
 /bin/rm -f /etc/runlevels/default/* /etc/runlevels/nonetwork/* /etc/runlevels/off/* /etc/runlevels/recovery/* /etc/runlevels/sysinit/*
 
-/bin/cp /etc/init.d/{acpi-support,acpid,avahi-daemon,bluetooth,bootlogs,console-setup.sh,cron,cups,dbus,dhcpcd,dnsmasq,elogind,haveged,irqbalance,network-manager,plymouth,preload,pulseaudio-enable-autospawn,rc.local,rmnologin,rng-tools,rsync,rsyslog,sddm,uuidd} /etc/runlevels/default/
+/bin/cp /etc/init.d/{acpi-support,acpid,avahi-daemon,bluetooth,bootlogs,cgroupfs-mount,console-setup.sh,cron,cups,dbus,dhcpcd,dnsmasq,docker,elogind,haveged,irqbalance,network-manager,plymouth,preload,pulseaudio-enable-autospawn,rc.local,rmnologin,rng-tools,rsync,rsyslog,sddm,tlp,uuidd} /etc/runlevels/default/
 
 /bin/cp /etc/init.d/rc.local /etc/runlevels/nonetwork/local
 

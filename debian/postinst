@@ -5,3 +5,13 @@ ln -sv /usr/sbin/poweroff /sbin/poweroff
 ln -sv /usr/sbin/reboot /sbin/reboot
 
 rc-update -u
+
+sed -i 's/#rc_parallel="NO"/rc_parallel="YES"/g' /etc/rc.conf
+sed -i 's/#rc_shell=/bin/sh/rc_shell=/bin/bash/g' /etc/rc.conf
+sed -i 's/#rc_logger="NO"/rc_logger="YES"/g' /etc/rc.conf
+sed -i 's/#rc_log_path="/var/log/rc.log"/rc_log_path="/var/log/rc.log"/g' /etc/rc.conf
+sed -i 's/#rc_crashed_start=YES/rc_crashed_start=YES/g' /etc/rc.conf
+sed -i 's/#unicode="NO"/unicode="YES"/g' /etc/rc.conf
+sed -i 's/#rc_send_sighup="NO"/rc_send_sighup="YES"/g' /etc/rc.conf
+sed -i 's/#rc_timeout_stopsec="90"/rc_timeout_stopsec="10"/g' /etc/rc.conf
+sed -i 's/#rc_send_sigkill="YES"/rc_send_sigkill="YES"/g' /etc/rc.conf
