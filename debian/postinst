@@ -29,4 +29,6 @@ for i in {2..6}; do
   rc-update add agetty.tty${i} default
 done
 
+#   Update services list
+
 rc-update -u
