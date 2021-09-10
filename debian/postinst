@@ -1,10 +1,16 @@
 #!/bin/bash
 
+#   Add link for init PID 1
+
 ln -sv /sbin/openrc-init /sbin/init
+
+#   Add links for *nix commands
+
 ln -sv /usr/sbin/poweroff /sbin/poweroff
 ln -sv /usr/sbin/reboot /sbin/reboot
+ln -sv /usr/sbin/halt /sbin/halt
 
-rc-update -u
+#   Edit vanilla rc.conf with our default values
 
 sed -i 's/#rc_parallel="NO"/rc_parallel="YES"/g' /etc/rc.conf
 sed -i 's/#rc_shell=/bin/sh/rc_shell=/bin/bash/g' /etc/rc.conf
@@ -15,3 +21,12 @@ sed -i 's/#unicode="NO"/unicode="YES"/g' /etc/rc.conf
 sed -i 's/#rc_send_sighup="NO"/rc_send_sighup="YES"/g' /etc/rc.conf
 sed -i 's/#rc_timeout_stopsec="90"/rc_timeout_stopsec="10"/g' /etc/rc.conf
 sed -i 's/#rc_send_sigkill="YES"/rc_send_sigkill="YES"/g' /etc/rc.conf
+
+#   Add ttys
+
+for i in {2..6}; do
+  ln -sv /etc/init.d/agetty /etc/init.d/agetty.tty${i}
+  rc-update add agetty.tty${i} default
+done
+
+rc-update -u
