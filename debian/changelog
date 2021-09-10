@@ -1,6 +1,6 @@
 openrc-config (0.1.0)  nitrux; urgency=medium
 
-  * Fix halt script.
+  * Fix halt script, change drop shell in rc.conf, add dependency conflict.
 
  -- Uri Herrera <uri_herrera@nxos.org>  Fri, 10 Sep 2021 02:53:00 -0500
 
