@@ -13,7 +13,7 @@ ln -sv /usr/sbin/halt /sbin/halt
 #   Edit vanilla rc.conf with our default values
 
 sed -i 's/#rc_parallel="NO"/rc_parallel="YES"/g' /etc/rc.conf
-sed -i 's/#rc_shell=/bin/sh/rc_shell=/bin/bash/g' /etc/rc.conf
+sed -i 's/#rc_shell=/bin/sh/rc_shell=/bin/zsh/g' /etc/rc.conf
 sed -i 's/#rc_logger="NO"/rc_logger="YES"/g' /etc/rc.conf
 sed -i 's/#rc_log_path="/var/log/rc.log"/rc_log_path="/var/log/rc.log"/g' /etc/rc.conf
 sed -i 's/#rc_crashed_start=YES/rc_crashed_start=YES/g' /etc/rc.conf

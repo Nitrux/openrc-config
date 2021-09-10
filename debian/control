@@ -10,6 +10,7 @@ Homepage: http://nxos.org
 Package: openrc-config
 Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}, openrc, sysvinit-utils
+Conflicts: systemd, systemd-sysv
 Description: Package to add runlevel configuration for OpenRC.
  This package will add the boot scripts to the runlevel
  directories used by OpenRC to boot the system.
