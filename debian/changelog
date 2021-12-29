@@ -1,6 +1,12 @@
+openrc-config (0.1.3)  nitrux; urgency=medium
+
+  * Add services to default
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Thu, 28 Sep 2021 19:36:00 -0500
+
 openrc-config (0.1.2)  nitrux; urgency=medium
 
-  * Fix sed commands in postinst.
+  * Add services to default.
 
  -- Uri Herrera <uri_herrera@nxos.org>  Thu, 28 Sep 2021 19:13:00 -0500
 
