@@ -24,7 +24,7 @@ sed -i 's/#rc_send_sigkill="YES"/rc_send_sigkill="YES"/g' /etc/rc.conf
 
 #   Add ttys
 
-for i in {2..6}; do
+for i in {2..3}; do
   ln -sv /etc/init.d/agetty /etc/init.d/agetty.tty${i}
   rc-update add agetty.tty${i} default
 done
