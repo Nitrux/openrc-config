@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# set cpu governors to "performance"
+for c in $(ls -d /sys/devices/system/cpu/cpu[0-9]*); do echo performance >$c/cpufreq/scaling_governor; done || true
