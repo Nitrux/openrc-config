@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# start schedtool
+/usr/bin/daemonize /usr/bin/schedtool || true
