@@ -1,8 +1,14 @@
+openrc-config (0.1.7)  nitrux; urgency=medium
+
+  * Rm scripts from rc.local.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Sun, 16 Jan 2022 17:32:00 -0500
+
 openrc-config (0.1.6)  nitrux; urgency=medium
 
   * Add scripts to rc.local.
 
- -- Uri Herrera <uri_herrera@nxos.org>  Mon, 17 Jan 2022 05:40:00 -0500
+ -- Uri Herrera <uri_herrera@nxos.org>  Sun, 16 Jan 2022 05:40:00 -0500
 
 openrc-config (0.1.5)  nitrux; urgency=medium
 
