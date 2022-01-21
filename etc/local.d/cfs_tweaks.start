@@ -1,4 +1,0 @@
-#!/bin/sh
-
-# tweak cfs scheduler
-/usr/bin/set-cfs-zen-tweaks || true
