@@ -1,5 +1,11 @@
 openrc-config (0.2.0)  nitrux; urgency=medium
 
+  * Remove script from rc.local.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Mon, 31 Jan 2022 21:27:00 -0500
+
+openrc-config (0.2.0)  nitrux; urgency=medium
+
   * Add script to rc.local.
 
  -- Uri Herrera <uri_herrera@nxos.org>  Mon, 31 Jan 2022 03:04:00 -0500
