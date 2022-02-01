@@ -1,4 +1,4 @@
-openrc-config (0.2.0)  nitrux; urgency=medium
+openrc-config (0.2.1)  nitrux; urgency=medium
 
   * Remove script from rc.local.
 
