@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#   Copy init scripts from init.d to OpenRC runlevels.
+#
+#   We don't link them because the links brake when creating the SquashFS root.
+
 /bin/rm -f /etc/runlevels/default/* /etc/runlevels/nonetwork/* /etc/runlevels/off/* /etc/runlevels/recovery/* /etc/runlevels/sysinit/*
 
 /bin/cp /etc/init.d/{acpi-support,acpid,avahi-daemon,bluetooth,bootlogs,cgroupfs-mount,console-setup.sh,cron,cups,dbus,dhcpcd,dnsmasq,docker,elogind,haveged,irqbalance,network-manager,nmbd,plymouth,preload,pulseaudio-enable-autospawn,rc.local,rmnologin,rng-tools,rsync,rsyslog,samba-ad-dc,sddm,smbd,sudo,tlp,uuidd,virtualbox} /etc/runlevels/default/ || true
