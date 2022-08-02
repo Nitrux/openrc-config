@@ -1,4 +1,5 @@
-# OpenRC Configuration [![Build Status](https://travis-ci.org/Nitrux/openrc-config.svg?branch=master)](https://travis-ci.org/Nitrux/openrc-config)
+# OpenRC Configuration
+
 OpenRC configuration used in Nitrux.
 
 # Issues
