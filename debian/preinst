@@ -4,7 +4,7 @@
 #
 #   We don't link them because the links brake when creating the SquashFS root.
 
-/bin/rm -f /etc/runlevels/default/* /etc/runlevels/nonetwork/* /etc/runlevels/off/* /etc/runlevels/recovery/* /etc/runlevels/sysinit/*
+/bin/rm -f /etc/runlevels/default/* /etc/runlevels/nonetwork/* /etc/runlevels/off/* /etc/runlevels/recovery/* /etc/runlevels/sysinit/* /etc/runlevels/boot/*
 
 /bin/cp /etc/init.d/{acpi-support,acpid,avahi-daemon,bluetooth,bootlogs,cgroupfs-mount,console-setup.sh,cron,cups,dbus,dhcpcd,dnsmasq,docker,elogind,grub-common,haveged,irqbalance,lxc,lxc-net,network-manager,nfs-common,nmbd,nohang,plymouth,preload,pulseaudio-enable-autospawn,rc.local,rmnologin,rng-tools,rpcbind,rsync,rsyslog,samba-ad-dc,sddm,smbd,sudo,tlp,uuidd,virtualbox,waydroid-container} /etc/runlevels/default/ || true
 
