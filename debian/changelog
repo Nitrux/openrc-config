@@ -1,4 +1,4 @@
-openrc-config (0.2.4)  nitrux; urgency=high
+openrc-config (0.2.6)  nitrux; urgency=high
 
   * Add services to runlevels.
 
