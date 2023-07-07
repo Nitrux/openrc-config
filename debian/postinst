@@ -21,6 +21,9 @@ sed -i 's/#unicode="NO"/unicode="YES"/g' /etc/rc.conf
 sed -i 's/#rc_send_sighup="NO"/rc_send_sighup="YES"/g' /etc/rc.conf
 sed -i 's/#rc_timeout_stopsec="90"/rc_timeout_stopsec="10"/g' /etc/rc.conf
 sed -i 's/#rc_send_sigkill="YES"/rc_send_sigkill="YES"/g' /etc/rc.conf
+sed -i 's/#rc_controller_cgroups="YES"/rc_controller_cgroups="YES"/g' /etc/rc.conf
+sed -i 's/#rc_cgroup_mode="hybrid"/rc_cgroup_mode="unified"/g' /etc/rc.conf
+sed -i 's/#rc_cgroup_controllers=""/rc_cgroup_controllers="cgroup_root openrc none cpuset cpu cpuacct blkio io memory devices freezer net_cls perf_event net_prio hugetlb pids rdma misc cgroup"/g' /etc/rc.conf
 
 #   Add ttys
 
