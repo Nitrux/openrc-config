@@ -4,6 +4,12 @@ openrc-config (0.2.9)  nitrux; urgency=high
 
  -- Uri Herrera <uri_herrera@nxos.org>  Fri, 07 Jul 2023 12:19:00 -0500
 
+openrc-config (0.2.8)  nitrux; urgency=high
+
+  * Enable CGroups version 2.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Fri, 07 Jul 2023 12:19:00 -0500
+
 openrc-config (0.2.7)  nitrux; urgency=high
 
   * Remove service from runlevels.
