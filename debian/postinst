@@ -27,7 +27,7 @@ sed -i 's/#rc_cgroup_controllers=""/rc_cgroup_controllers="cgroup_root openrc no
 
 #   Add ttys
 
-for i in {2..3}; do
+for i in {2..7}; do
   ln -sv /etc/init.d/agetty /etc/init.d/agetty.tty${i}
   rc-update add agetty.tty${i} default
 done
