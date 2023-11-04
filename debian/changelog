@@ -1,3 +1,9 @@
+openrc-config (0.3.1)  nitrux; urgency=high
+
+  * Add services for Hyper-V to runlevel.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Sat, 04 Nov 2023 03:50:00 -0500
+
 openrc-config (0.3.0)  nitrux; urgency=high
 
   * Update /etc/inittab.
