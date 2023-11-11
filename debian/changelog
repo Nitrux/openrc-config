@@ -1,4 +1,4 @@
-openrc-config (0.3.1)  nitrux; urgency=high
+openrc-config (0.3.2)  nitrux; urgency=high
 
   * Add service for mount binds to runlevel.
 
