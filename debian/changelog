@@ -1,5 +1,11 @@
 openrc-config (0.3.3)  nitrux; urgency=high
 
+  * Add service for WebDAV proxy for Spice.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Fri, 08 Nov 2023 02:54:00 -0500
+
+openrc-config (0.3.3)  nitrux; urgency=high
+
   * Enable CGroups version 2, again.
 
  -- Uri Herrera <uri_herrera@nxos.org>  Sun, 12 Nov 2023 14:17:00 -0500
