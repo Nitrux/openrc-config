@@ -1,3 +1,9 @@
+openrc-config (0.3.9)  nitrux; urgency=high
+
+  * Add service for powertop.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Sun 21 Apr 2024 14:32:00 -0500
+ 
 openrc-config (0.3.8)  nitrux; urgency=high
 
   * Remove service for tor-openrc.
