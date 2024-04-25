@@ -1,3 +1,9 @@
+openrc-config (0.4.2)  nitrux; urgency=high
+
+  * Replace service file plymouth with plymouth-openrc.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Thu 24 Apr 2024 03:25:00 -0500
+ 
 openrc-config (0.4.1)  nitrux; urgency=high
 
   * Remove service for dnsmasq from default runlevel.
