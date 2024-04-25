@@ -1,3 +1,9 @@
+openrc-config (0.4.0)  nitrux; urgency=high
+
+  * Add service for fprintd and openrazer-daemon.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Wed 23 Apr 2024 18:52:00 -0500
+ 
 openrc-config (0.3.9)  nitrux; urgency=high
 
   * Add service for powertop.
