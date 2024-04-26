@@ -1,3 +1,9 @@
+openrc-config (0.4.4)  nitrux; urgency=high
+
+  * Do not add service script to nonetwork runlevel.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Fri 26 Apr 2024 08:45:00 -0500
+
 openrc-config (0.4.3)  nitrux; urgency=high
 
   * Remove file from local.d.
