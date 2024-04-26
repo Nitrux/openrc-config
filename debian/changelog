@@ -1,3 +1,9 @@
+openrc-config (0.4.3)  nitrux; urgency=high
+
+  * Remove file from local.d.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Fri 26 Apr 2024 08:36:00 -0500
+ 
 openrc-config (0.4.2)  nitrux; urgency=high
 
   * Replace service file plymouth with plymouth-openrc.
