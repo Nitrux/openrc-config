@@ -2,7 +2,7 @@ openrc-config (0.4.8)  nitrux; urgency=high
 
   * Remove ntpsec-wait.
 
- -- Uri Herrera <uri_herrera@nxos.org>  Tue 07 May 2024 04:07:00 -0500
+ -- Uri Herrera <uri_herrera@nxos.org>  Wed 19 May 2024 05:42:00 -0500
 
 openrc-config (0.4.7)  nitrux; urgency=high
 
