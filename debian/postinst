@@ -6,9 +6,9 @@ ln -sv /sbin/openrc-init /sbin/init
 
 #   Add links for *nix commands
 
-ln -sv /usr/sbin/poweroff /sbin/poweroff
-ln -sv /usr/sbin/reboot /sbin/reboot
-ln -sv /usr/sbin/halt /sbin/halt
+# ln -sv /usr/sbin/poweroff /sbin/poweroff
+# ln -sv /usr/sbin/reboot /sbin/reboot
+# ln -sv /usr/sbin/halt /sbin/halt
 
 #   Edit vanilla rc.conf with our default values
 

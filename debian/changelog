@@ -1,8 +1,14 @@
+openrc-config (0.4.9)  nitrux; urgency=high
+
+  * Do not create links for nix commands since they already exist in root.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Mon 20 May 2024 17:35:00 -0500
+
 openrc-config (0.4.8)  nitrux; urgency=high
 
   * Remove ntpsec-wait.
 
- -- Uri Herrera <uri_herrera@nxos.org>  Wed 19 May 2024 05:42:00 -0500
+ -- Uri Herrera <uri_herrera@nxos.org>  Wed 15 May 2024 05:42:00 -0500
 
 openrc-config (0.4.7)  nitrux; urgency=high
 
