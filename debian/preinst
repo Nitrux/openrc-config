@@ -6,7 +6,7 @@
 
 /bin/rm -f /etc/runlevels/default/* /etc/runlevels/nonetwork/* /etc/runlevels/off/* /etc/runlevels/recovery/* /etc/runlevels/sysinit/* /etc/runlevels/boot/*
 
-/bin/cp /etc/init.d/{acpi-support,acpid,alsa-utils,avahi-daemon,bluetooth,bootlogs,cgroupfs-mount,console-setup.sh,cron,cups,dbus,debugfs-mount,docker,elogind,fprintd-openrc,grub-common,haveged,hv-fcopy-daemon,hv-kvp-daemon,hv-vss-daemon,irqbalance,lxc,lxc-net,mountbinds,network-manager,nfs-common,nmbd,nohang,ntpsec-openrc,plymouth-openrc,powertop,preload,pulseaudio-enable-autospawn,rmnologin,rngd,rpcbind,rsyslog,samba-ad-dc,sddm,smbd,sudo,tlp,usbmuxd,uuidd} /etc/runlevels/default/ || true
+/bin/cp /etc/init.d/{acpi-support,acpid,alsa-utils,avahi-daemon,bluetooth,bootlogs,cgroupfs-mount,console-setup.sh,cron,cups,dbus,debugfs-mount,docker,elogind,fprintd-openrc,grub-common,haveged,hv-fcopy-daemon,hv-kvp-daemon,hv-vss-daemon,irqbalance,lxc,lxc-net,mountbinds,network-manager,nfs-common,nmbd,nohang,ntpsec-openrc,plymouth-openrc,powertop,preload,pulseaudio-enable-autospawn,rmnologin,rpcbind,rsyslog,samba-ad-dc,sddm,smbd,sudo,tlp,usbmuxd,uuidd} /etc/runlevels/default/ || true
 
 # /bin/cp /etc/init.d/rc.local /etc/runlevels/nonetwork/local || true
 
