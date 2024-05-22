@@ -2,8 +2,9 @@
 
 set -x
 
-### Basic Packages
-apt -qq -yy install equivs git devscripts lintian --no-install-recommends
+### Basic Packageslintian
+apt -qq update
+apt -qq -yy install equivs git devscripts  --no-install-recommends
 
 ### Install Dependencies
 mk-build-deps -i -t "apt-get --yes" -r
