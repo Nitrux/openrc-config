@@ -9,7 +9,7 @@
 
 # -- Create stacked runlevel "async" and add it to default.
 
-mkdir -P /etc/runlevels/async
+mkdir /etc/runlevels/async
 rc-update add -s default async
 
 

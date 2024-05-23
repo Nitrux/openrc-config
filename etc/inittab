@@ -32,6 +32,9 @@ l6:6:wait:/sbin/openrc reboot
 l6r:6:wait:/sbin/reboot -d
 #z6:6:respawn:/sbin/sulogin
 
+# Include stacked runlevel "async".
+::once:/sbin/openrc async
+
 # new-style single-user
 su0:S:wait:/sbin/openrc single
 su1:S:wait:/sbin/sulogin
