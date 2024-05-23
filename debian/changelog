@@ -1,3 +1,9 @@
+openrc-config (0.5.1)  nitrux; urgency=high
+
+  * Add nohang-desktop to default runlevel.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Thu 23 May 2024 01:51:00 -0500
+
 openrc-config (0.5.0)  nitrux; urgency=high
 
   * Remove rngd from runlevel.
