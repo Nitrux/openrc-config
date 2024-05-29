@@ -9,8 +9,7 @@
 
 # -- Create custom runlevel "async" directory and stack it to default.
 
-mkdir /etc/runlevels/async
-rc-update add -s async default
+mkdir /etc/runlevels/async && rc-update add -s async default
 
 
 # -- Copy init scripts from init.d to OpenRC runlevels.
