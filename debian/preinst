@@ -10,7 +10,7 @@
 # -- Create stacked runlevel "async" and add it to default.
 
 mkdir /etc/runlevels/async
-rc-update add -s default async
+rc-update add -s async default
 
 
 # -- Copy init scripts from init.d to OpenRC runlevels.
