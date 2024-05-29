@@ -7,7 +7,7 @@
 /bin/rm -f /etc/runlevels/default/* /etc/runlevels/nonetwork/* /etc/runlevels/off/* /etc/runlevels/recovery/* /etc/runlevels/sysinit/* /etc/runlevels/boot/*
 
 
-# -- Create stacked runlevel "async" and add it to default.
+# -- Create stacked runlevel "async" directory and stack it to default.
 
 mkdir /etc/runlevels/async
 rc-update add -s async default
