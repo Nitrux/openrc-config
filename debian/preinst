@@ -14,9 +14,9 @@ mkdir /etc/runlevels/async && rc-update add -s async default
 
 # -- Copy init scripts from init.d to OpenRC runlevels.
 
-/bin/cp /etc/init.d/{acpi-support,acpid,alsa-utils,bluetooth,bootlogs,cgroupfs-mount,console-setup.sh,cron,dbus,debugfs-mount,elogind,fprintd-openrc,grub-common,haveged,irqbalance,mountbinds,network-manager,nfs-common,nmbd,nohang-desktop-openrc,ntpsec-openrc,plymouth-openrc,powertop,preload,pulseaudio-enable-autospawn,rmnologin,rsyslog,sddm,sudo,tlp,usbmuxd,uuidd} /etc/runlevels/default/ || true
+/bin/cp /etc/init.d/{acpi-support,acpid,bootlogs,cgroupfs-mount,console-setup.sh,dbus,debugfs-mount,elogind,fprintd-openrc,grub-common,haveged,mountbinds,network-manager,nohang-desktop-openrc,ntpsec-openrc,plymouth-openrc,powertop,pulseaudio-enable-autospawn,rmnologin,sddm,sudo,tlp,uuidd} /etc/runlevels/default/ || true
 
-/bin/cp /etc/init.d/{avahi-daemon,cups,docker,hv-fcopy-daemon,hv-kvp-daemon,hv-vss-daemon,lxc,lxc-net,rpcbind,samba-ad-dc,smbd} /etc/runlevels/async/ || true
+/bin/cp /etc/init.d/{alsa-utils,avahi-daemon,bluetooth,cron,cups,docker,hv-fcopy-daemon,hv-kvp-daemon,hv-vss-daemon,irqbalance,lxc,lxc-net,nfs-common,nmbd,preload,rpcbind,rsyslog,samba-ad-dc,smbd,usbmuxd} /etc/runlevels/async/ || true
 
 # /bin/cp /etc/init.d/rc.local /etc/runlevels/nonetwork/local || true
 

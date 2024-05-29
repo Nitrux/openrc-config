@@ -1,3 +1,9 @@
+openrc-config (0.5.5)  nitrux; urgency=high
+
+  * Move more services from default to async.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Wed 29 May 2024 02:55:00 -0500
+
 openrc-config (0.5.4)  nitrux; urgency=high
 
   * Fix command to stack async runlevel.
