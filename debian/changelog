@@ -1,3 +1,9 @@
+openrc-config (0.5.6)  nitrux; urgency=high
+
+  * Add thp-settings to async.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Wed, 29 May 2024 05:19:00 -0500
+
 openrc-config (0.5.5)  nitrux; urgency=high
 
   * Move more services from default to async.
