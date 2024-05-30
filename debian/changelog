@@ -2,121 +2,121 @@ openrc-config (0.5.5)  nitrux; urgency=high
 
   * Move more services from default to async.
 
- -- Uri Herrera <uri_herrera@nxos.org>  Wed 29 May 2024 02:55:00 -0500
+ -- Uri Herrera <uri_herrera@nxos.org>  Wed, 29 May 2024 02:55:00 -0500
 
 openrc-config (0.5.4)  nitrux; urgency=high
 
   * Fix command to stack async runlevel.
 
- -- Uri Herrera <uri_herrera@nxos.org>  Tue 28 May 2024 22:31:00 -0500
+ -- Uri Herrera <uri_herrera@nxos.org>  Tue, 28 May 2024 22:31:00 -0500
 
 openrc-config (0.5.3)  nitrux; urgency=high
 
   * Configure async runlevel.
 
- -- Uri Herrera <uri_herrera@nxos.org>  Thu 23 May 2024 15:30:00 -0500
+ -- Uri Herrera <uri_herrera@nxos.org>  Thu, 23 May 2024 15:30:00 -0500
 
 openrc-config (0.5.2)  nitrux; urgency=high
 
   * Add async runlevel.
 
- -- Uri Herrera <uri_herrera@nxos.org>  Thu 23 May 2024 14:54:00 -0500
+ -- Uri Herrera <uri_herrera@nxos.org>  Thu, 23 May 2024 14:54:00 -0500
 
 openrc-config (0.5.1)  nitrux; urgency=high
 
   * Add nohang-desktop to default runlevel.
 
- -- Uri Herrera <uri_herrera@nxos.org>  Thu 23 May 2024 01:51:00 -0500
+ -- Uri Herrera <uri_herrera@nxos.org>  Thu, 23 May 2024 01:51:00 -0500
 
 openrc-config (0.5.0)  nitrux; urgency=high
 
   * Remove rngd from runlevel.
 
- -- Uri Herrera <uri_herrera@nxos.org>  Tue 21 May 2024 22:53:00 -0500
+ -- Uri Herrera <uri_herrera@nxos.org>  Tue, 21 May 2024 22:53:00 -0500
 
 openrc-config (0.4.9)  nitrux; urgency=high
 
   * Do not create links for nix commands since they already exist in root.
 
- -- Uri Herrera <uri_herrera@nxos.org>  Mon 20 May 2024 17:35:00 -0500
+ -- Uri Herrera <uri_herrera@nxos.org>  Mon, 20 May 2024 17:35:00 -0500
 
 openrc-config (0.4.8)  nitrux; urgency=high
 
   * Remove ntpsec-wait.
 
- -- Uri Herrera <uri_herrera@nxos.org>  Wed 15 May 2024 05:42:00 -0500
+ -- Uri Herrera <uri_herrera@nxos.org>  Wed, 15 May 2024 05:42:00 -0500
 
 openrc-config (0.4.7)  nitrux; urgency=high
 
   * Change ntpsec file name.
 
- -- Uri Herrera <uri_herrera@nxos.org>  Tue 07 May 2024 04:07:00 -0500
+ -- Uri Herrera <uri_herrera@nxos.org>  Tue, 07 May 2024 04:07:00 -0500
 
 openrc-config (0.4.6)  nitrux; urgency=high
 
   * Add ntpsec service scripts to runlevel default.
 
- -- Uri Herrera <uri_herrera@nxos.org>  Tue 07 May 2024 03:19:00 -0500
+ -- Uri Herrera <uri_herrera@nxos.org>  Tue, 07 May 2024 03:19:00 -0500
 
 openrc-config (0.4.5)  nitrux; urgency=high
 
   * Remove various services from starting by default in the default runlevel.
 
- -- Uri Herrera <uri_herrera@nxos.org>  Thu 02 May 2024 12:54:00 -0500
+ -- Uri Herrera <uri_herrera@nxos.org>  Thu, 02 May 2024 12:54:00 -0500
 
 openrc-config (0.4.4)  nitrux; urgency=high
 
   * Do not add service script to nonetwork runlevel.
 
- -- Uri Herrera <uri_herrera@nxos.org>  Fri 26 Apr 2024 08:45:00 -0500
+ -- Uri Herrera <uri_herrera@nxos.org>  Fri, 26 Apr 2024 08:45:00 -0500
 
 openrc-config (0.4.3)  nitrux; urgency=high
 
   * Remove file from local.d.
 
- -- Uri Herrera <uri_herrera@nxos.org>  Fri 26 Apr 2024 08:36:00 -0500
+ -- Uri Herrera <uri_herrera@nxos.org>  Fri, 26 Apr 2024 08:36:00 -0500
  
 openrc-config (0.4.2)  nitrux; urgency=high
 
   * Replace service file plymouth with plymouth-openrc.
 
- -- Uri Herrera <uri_herrera@nxos.org>  Thu 24 Apr 2024 03:25:00 -0500
+ -- Uri Herrera <uri_herrera@nxos.org>  Thu, 24 Apr 2024 03:25:00 -0500
  
 openrc-config (0.4.1)  nitrux; urgency=high
 
   * Remove service for dnsmasq from default runlevel.
 
- -- Uri Herrera <uri_herrera@nxos.org>  Thu 24 Apr 2024 03:10:00 -0500
+ -- Uri Herrera <uri_herrera@nxos.org>  Thu, 24 Apr 2024 03:10:00 -0500
  
 openrc-config (0.4.0)  nitrux; urgency=high
 
   * Add service for fprintd and openrazer-daemon.
 
- -- Uri Herrera <uri_herrera@nxos.org>  Wed 23 Apr 2024 18:52:00 -0500
+ -- Uri Herrera <uri_herrera@nxos.org>  Wed, 23 Apr 2024 18:52:00 -0500
  
 openrc-config (0.3.9)  nitrux; urgency=high
 
   * Add service for powertop.
 
- -- Uri Herrera <uri_herrera@nxos.org>  Sun 21 Apr 2024 14:32:00 -0500
+ -- Uri Herrera <uri_herrera@nxos.org>  Sun, 21 Apr 2024 14:32:00 -0500
  
 openrc-config (0.3.8)  nitrux; urgency=high
 
   * Remove service for tor-openrc.
 
- -- Uri Herrera <uri_herrera@nxos.org>  Tue 16 Apr 2024 11:53:00 -0500
+ -- Uri Herrera <uri_herrera@nxos.org>  Tue, 16 Apr 2024 11:53:00 -0500
  
 openrc-config (0.3.7)  nitrux; urgency=high
 
   * Add service for tor-openrc.
 
- -- Uri Herrera <uri_herrera@nxos.org>  Tue 16 Apr 2024 03:39:00 -0500
+ -- Uri Herrera <uri_herrera@nxos.org>  Tue, 16 Apr 2024 03:39:00 -0500
  
 openrc-config (0.3.6)  nitrux; urgency=high
 
   * Add service for usbmuxd.
 
- -- Uri Herrera <uri_herrera@nxos.org>  Sun 24 Dec 2023 22:06:00 -0500
+ -- Uri Herrera <uri_herrera@nxos.org>  Sun, 24 Dec 2023 22:06:00 -0500
  
 openrc-config (0.3.5)  nitrux; urgency=high
 
