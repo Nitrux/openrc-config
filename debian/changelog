@@ -1,3 +1,9 @@
+openrc-config (0.5.7)  nitrux; urgency=high
+
+  * Add dnsmasq-openrc to default runlevel.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Sun, 02 Jun 2024 20:18:00 -0500
+
 openrc-config (0.5.6)  nitrux; urgency=high
 
   * Add thp-settings to async.
