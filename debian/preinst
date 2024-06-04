@@ -14,9 +14,9 @@ mkdir /etc/runlevels/async && rc-update add -s async default
 
 # -- Copy init scripts from init.d to OpenRC runlevels.
 
-/bin/cp /etc/init.d/{acpi-support,acpid,console-setup.sh,dbus,debugfs-mount,dnsmasq-openrc,elogind,fprintd-openrc,mountbinds,network-manager,nohang-desktop-openrc,ntpsec-openrc,plymouth-openrc,powertop,rmnologin,sddm,sudo,tlp,uuidd} /etc/runlevels/default/ || true
+/bin/cp /etc/init.d/{acpi-support,acpid,console-setup.sh,dbus,debugfs-mount-openrc,dnsmasq-openrc,elogind,fprintd-openrc,mountbinds,network-manager,nohang-desktop-openrc,ntpsec-openrc,plymouth-openrc,powertop-openrc,rmnologin,sddm,sudo,tlp,uuidd} /etc/runlevels/default/ || true
 
-/bin/cp /etc/init.d/{avahi-daemon,bluetooth,cron,cups,irqbalance,nmbd,preload,smbd,thp-settings,usbmuxd} /etc/runlevels/async/ || true
+/bin/cp /etc/init.d/{avahi-daemon-openrc,bluetooth,cron,cups,irqbalance,nmbd,preload,smbd,thp-settings,usbmuxd-openrc} /etc/runlevels/async/ || true
 
 # /bin/cp /etc/init.d/rc.local /etc/runlevels/nonetwork/local || true
 
@@ -26,4 +26,4 @@ mkdir /etc/runlevels/async && rc-update add -s async default
 
 /bin/cp /etc/init.d/{apparmor,bootmisc.sh,brightness,cgroups,checkroot-bootclean.sh,checkroot.sh,eudev,hostname.sh,hwclock.sh,keyboard-setup.sh,kmod,mount-configfs,mountall-bootclean.sh,mountall.sh,mountdevsubfs.sh,mountkernfs.sh,mountnfs.sh,networking,plymouth-log,procps,selinux-autorelabel,ufw,urandom,x11-common} /etc/runlevels/sysinit || true
 
-/bin/cp /etc/init.d/{cryptdisks,cryptdisks-early,cryptmount,device-mapper,dmcrypt,dmeventd} /etc/runlevels/boot || true
+/bin/cp /etc/init.d/{cryptdisks,cryptdisks-early,cryptmount-openrc,device-mapper-openrc,dmcrypt-openrc,dmeventd-openrc} /etc/runlevels/boot || true
