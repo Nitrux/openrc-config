@@ -14,7 +14,7 @@ mkdir /etc/runlevels/async && rc-update add -s async default
 
 # -- Copy init scripts from init.d to OpenRC runlevels.
 
-/bin/cp /etc/init.d/{acpi-support,acpid,console-setup.sh,dbus,debugfs-mount-openrc,dnsmasq-openrc,elogind,fprintd-openrc,mountbinds,network-manager,nohang-desktop-openrc,ntpsec-openrc,plymouth-openrc,powertop-openrc,rmnologin,sddm,sudo,tlp,uuidd} /etc/runlevels/default/ || true
+/bin/cp /etc/init.d/{acpi-support,acpid,console-setup.sh,dbus,debugfs-mount-openrc,elogind,fprintd-openrc,mountbinds,network-manager,nohang-desktop-openrc,ntpsec-openrc,plymouth-openrc,powertop-openrc,rmnologin,sddm,sudo,tlp,uuidd} /etc/runlevels/default/ || true
 
 /bin/cp /etc/init.d/{avahi-daemon-openrc,bluetooth,cron,cups,irqbalance,nmbd,preload,rsyslog-openrc,smbd,thp-settings,usbmuxd-openrc} /etc/runlevels/async/ || true
 
