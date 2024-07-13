@@ -1,3 +1,9 @@
+openrc-config (0.6.5)  nitrux; urgency=high
+
+  * Add supervisor-openrc to async.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Sat, 13 Jul 2024 02:14:00 -0500
+
 openrc-config (0.6.4)  nitrux; urgency=high
 
   * Replace SysV bluez script with native OpenRc scripts.
