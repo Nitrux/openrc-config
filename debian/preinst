@@ -1,5 +1,4 @@
-#! /bin/bash
-
+#!/usr/bin/env bash
 
 # -- Remove whatever is currently in the runlevels.
 # -- By default, upstream creates links but we don't because the links brake when creating the SquashFS.

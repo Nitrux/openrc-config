@@ -1,3 +1,9 @@
+openrc-config (0.6.6-1)  nitrux; urgency=high
+
+  * Update maintainer scripts.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Wed, 07 Aug 2024 07:54:00 -0500
+
 openrc-config (0.6.6)  nitrux; urgency=high
 
   * Remove supervisor-openrc from async.

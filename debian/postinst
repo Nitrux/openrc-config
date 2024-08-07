@@ -1,16 +1,13 @@
-#! /bin/bash
+#!/usr/bin/env bash
 
-#   Add link for init PID 1
+# -- Exit on errors.
+
+
+# -- Add link for init PID 1.
 
 ln -sv /sbin/openrc-init /sbin/init
 
-#   Add links for *nix commands
-
-# ln -sv /usr/sbin/poweroff /sbin/poweroff
-# ln -sv /usr/sbin/reboot /sbin/reboot
-# ln -sv /usr/sbin/halt /sbin/halt
-
-#   Edit vanilla rc.conf with our default values
+# -- Edit vanilla rc.conf with our default values.
 
 sed -i 's/#rc_parallel="NO"/rc_parallel="YES"/g' /etc/rc.conf
 sed -i 's+#rc_shell=/bin/sh+rc_shell=/bin/zsh+g' /etc/rc.conf
@@ -25,13 +22,13 @@ sed -i 's/#rc_controller_cgroups="YES"/rc_controller_cgroups="YES"/g' /etc/rc.co
 sed -i 's/#rc_cgroup_mode="unified"/rc_cgroup_mode="unified"/g' /etc/rc.conf
 sed -i 's/#rc_cgroup_controllers=""/rc_cgroup_controllers="cgroup_root openrc none cpuset cpu cpuacct blkio io memory devices freezer net_cls perf_event net_prio hugetlb pids rdma misc cgroup"/g' /etc/rc.conf
 
-#   Add ttys
+# -- Add ttys.
 
 for i in {2..7}; do
-  ln -sv /etc/init.d/agetty /etc/init.d/agetty.tty${i}
-  rc-update add agetty.tty${i} default
+  ln -sv "/etc/init.d/agetty" "/etc/init.d/agetty.tty${i}"
+  rc-update add "agetty.tty${i}" default
 done
 
-#   Update services list
+# -- Update services list.
 
 rc-update -u
