@@ -1,3 +1,9 @@
+openrc-config (0.6.7)  nitrux; urgency=high
+
+  * Add bcm-drv to async.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Mon, 21 Oct 2024 14:37:00 -0500
+
 openrc-config (0.6.6-1)  nitrux; urgency=high
 
   * Update maintainer scripts.
