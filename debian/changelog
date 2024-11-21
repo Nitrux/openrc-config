@@ -1,3 +1,9 @@
+openrc-config (0.7.0)  nitrux; urgency=high
+
+  * Add plymouth-openrc to off runlevel.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Wed, 20 Nov 2024 22:17:00 -0500
+
 openrc-config (0.6.9)  nitrux; urgency=high
 
   * Sort services.

@@ -19,7 +19,7 @@ mkdir /etc/runlevels/async && rc-update add -s async default
 
 # /bin/cp /etc/init.d/rc.local /etc/runlevels/nonetwork/local || true
 
-/bin/cp /etc/init.d/{savecache,sendsigs,umountfs,umountroot} /etc/runlevels/off || true
+/bin/cp /etc/init.d/{plymouth-openrc,savecache,sendsigs,umountfs,umountroot} /etc/runlevels/off || true
 
 # /bin/cp /etc/init.d/{bootlogs,killprocs,single} /etc/runlevels/recovery || true
 
