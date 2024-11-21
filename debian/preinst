@@ -23,6 +23,6 @@ mkdir /etc/runlevels/async && rc-update add -s async default
 
 # /bin/cp /etc/init.d/{bootlogs,killprocs,single} /etc/runlevels/recovery || true
 
-/bin/cp /etc/init.d/{apparmor,bootmisc.sh,brightness,cgroups,eudev,hostname.sh,hwclock.sh,kmod,mount-configfs,mountall-bootclean.sh,mountall.sh,mountdevsubfs.sh,mountkernfs.sh,networking,plymouth-log,procps,rc.local,ufw,urandom} /etc/runlevels/sysinit || true
+/bin/cp /etc/init.d/{apparmor,bootmisc,brightness,cgroups,eudev,hostname,hwclock,kmod,mount-configfs,mountall-bootclean,mountall,mountdevsubfs,mountkernfs,networking,plymouth-log,procps,rc.local,ufw,urandom} /etc/runlevels/sysinit || true
 
 /bin/cp /etc/init.d/{cryptdisks,cryptdisks-early,cryptmount-openrc,device-mapper-openrc,dmcrypt-openrc,dmeventd-openrc} /etc/runlevels/boot || true

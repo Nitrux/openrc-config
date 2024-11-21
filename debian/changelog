@@ -1,3 +1,9 @@
+openrc-config (0.7.1)  nitrux; urgency=high
+
+  * Use file names from initscripts-openrc.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Thu, 21 Nov 2024 02:44:00 -0500
+
 openrc-config (0.7.0)  nitrux; urgency=high
 
   * Add plymouth-openrc to off runlevel.
