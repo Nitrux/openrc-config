@@ -1,6 +1,6 @@
 openrc-config (0.7.1)  nitrux; urgency=high
 
-  * Remove plymouth-openrc to off runlevel because it doesn't do anything.
+  * Remove plymouth-openrc from off runlevel because it doesn't do anything.
   * Add nvidia-powerd to async runlevel.
 
  -- Uri Herrera <uri_herrera@nxos.org>  Sat, 14 Nov 2024 17:01:00 -0500
