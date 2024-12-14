@@ -15,11 +15,11 @@ mkdir /etc/runlevels/async && rc-update add -s async default
 
 /bin/cp /etc/init.d/{acpi-support,acpid,console-setup.sh,dbus,debugfs-mount-openrc,elogind,fprintd-openrc,keyboard-setup.sh,mountbinds,network-manager,nohang-desktop-openrc,ntpsec-openrc,plymouth-openrc,powertop-openrc,rmnologin,sddm,sudo,tlp,uuidd,x11-common} /etc/runlevels/default/ || true
 
-/bin/cp /etc/init.d/{bcm-drv,bluez-meshd-openrc,bluez-obexd-openrc,bluez-openrc,cron,cups,irqbalance,preload,rapl-power,rsyslog-openrc,thp-settings,usbmuxd-openrc} /etc/runlevels/async/ || true
+/bin/cp /etc/init.d/{bcm-drv,bluez-meshd-openrc,bluez-obexd-openrc,bluez-openrc,cron,cups,irqbalance,nvidia-powerd,preload,rapl-power,rsyslog-openrc,thp-settings,usbmuxd-openrc} /etc/runlevels/async/ || true
 
 # /bin/cp /etc/init.d/rc.local /etc/runlevels/nonetwork/local || true
 
-/bin/cp /etc/init.d/{plymouth-openrc,savecache,sendsigs,umountfs,umountroot} /etc/runlevels/off || true
+/bin/cp /etc/init.d/{savecache,sendsigs,umountfs,umountroot} /etc/runlevels/off || true
 
 # /bin/cp /etc/init.d/{bootlogs,killprocs,single} /etc/runlevels/recovery || true
 
