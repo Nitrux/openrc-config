@@ -1,3 +1,9 @@
+openrc-config (0.7.2)  nitrux; urgency=high
+
+  * Add tlp-openrc and tlp-intel-mobile-openrc to default runlevels.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Sat, 25 Jan 2024 13:12:00 -0500
+
 openrc-config (0.7.1)  nitrux; urgency=high
 
   * Remove plymouth-openrc from off runlevel because it doesn't do anything.
