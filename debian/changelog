@@ -1,3 +1,9 @@
+openrc-config (0.7.4)  nitrux; urgency=high
+
+  * Test ppd service.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Thu, 30 Jan 2024 23:27:00 -0500
+
 openrc-config (0.7.3)  nitrux; urgency=high
 
   * Delete /etc/conf.d/agetty from this package to not conflict with the file provided by the Debian package.
