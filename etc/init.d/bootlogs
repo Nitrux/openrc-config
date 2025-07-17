@@ -1,0 +1,47 @@
+#!/sbin/openrc-run
+# Copyright (c) 2007-2020 The Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+description="Saves boot messages to /var/log/dmesg"
+
+depend() {
+	# We need local filesystems mounted to write to /var/log
+	need mountall
+}
+
+start() {
+	ebegin "Saving kernel boot messages"
+
+	# If /var/log/dmesg exists, rotate it.
+	# Otherwise, create it with appropriate permissions.
+	if [ -f /var/log/dmesg ]; then
+		savelog -q -p -c 5 /var/log/dmesg
+	else
+		touch /var/log/dmesg
+		chown root:adm /var/log/dmesg
+		chmod 640 /var/log/dmesg
+	fi
+
+	# Save kernel messages to /var/log/dmesg
+	# 'command -v' is the modern equivalent of 'which'
+	if command -v dmesg >/dev/null 2>&1; then
+		dmesg -s 524288 > /var/log/dmesg
+	elif [ -c /dev/klog ]; then
+		# Fallback method, same as in the original script
+		dd if=/dev/klog of=/var/log/dmesg &
+		sleep 1
+		kill $! >/dev/null 2>&1
+	fi
+
+	eend $?
+}
+
+stop() {
+	# This is a one-shot script, there is nothing to stop.
+	return 0
+}
+
+restart() {
+	# Restarting just means running the start action again.
+	start
+}

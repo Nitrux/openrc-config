@@ -1,0 +1,85 @@
+#!/sbin/openrc-run
+# Copyright (c) 2007-2021 The Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+description="Check all non-root filesystems for errors"
+FSCK_LOGFILE="/var/log/fsck/checkfs"
+
+depend() {
+	# Must run after the root filesystem is available
+	need root
+	# Must run before other filesystems are mounted
+	before localmount
+}
+
+# This function is called when fsck finds uncorrectable errors.
+_handle_failed_fsck() {
+	eerror "File system check failed."
+	eerror "A log is being saved in ${FSCK_LOGFILE} if that location is writable."
+	ewarn "A maintenance shell will now be started."
+	ewarn "Press Control-D to terminate this shell and resume system boot."
+
+	# get_boot_tty is the OpenRC function to find the system console
+	if ! sulogin "$(get_boot_tty)"; then
+		eerror "Attempt to start maintenance shell failed."
+		eerror "Continuing with system boot in 5 seconds."
+		sleep 5
+	fi
+}
+
+start() {
+	# In OpenRC, set rc_fast_boot="yes" in /etc/rc.conf to skip this check
+	if yesno "${rc_fast_boot}"; then
+		ewarn "Fast boot enabled, skipping file system check."
+		return 0
+	fi
+
+	ebegin "Checking non-root file systems"
+
+	local force_flag=""
+	# To force a check, create /forcefsck or set rc_force_fsck="yes" in /etc/rc.conf
+	if [ -f /forcefsck ] || yesno "${rc_force_fsck}"; then
+		force_flag="-f"
+	fi
+
+	local fix_flag=""
+	# Set rc_fsck_fix="yes" in /etc/rc.conf to auto-fix errors (fsck -y)
+	if yesno "${rc_fsck_fix}"; then
+		fix_flag="-y"
+	else
+		# Default is to fix safely (fsck -a)
+		fix_flag="-a"
+	fi
+
+	local fsck_opts="-T -M -A"
+	local fscktypes_opt=""
+	# Set rc_fsck_types="fstype1,fstype2" in /etc/rc.conf to limit check
+	[ -n "${rc_fsck_types}" ] && fscktypes_opt="-t ${rc_fsck_types}"
+
+	# Ensure the log directory exists
+	mkdir -p "$(dirname "${FSCK_LOGFILE}")"
+
+	# Run fsck and save output to a log file
+	fsck ${fsck_opts} ${fix_flag} ${force_flag} ${fscktypes_opt} > "${FSCK_LOGFILE}" 2>&1
+	local FSCKCODE=$?
+
+	# Clean up trigger files, same as the original script
+	rm -f /fastboot /forcefsck 2>/dev/null
+
+	# Evaluate the exit code from fsck
+	if [ "${FSCKCODE}" -ge 32 ]; then
+		ewarn "File system check was interrupted by user (code ${FSCKCODE})"
+		eend 1
+	elif [ "${FSCKCODE}" -gt 1 ]; then
+		eend 1 "Uncorrected errors found (code ${FSCKCODE})"
+		_handle_failed_fsck
+	else
+		# Exit code 0 (no errors) or 1 (errors corrected) are considered success
+		eend 0
+	fi
+}
+
+stop() {
+	# This is a one-shot script, there is nothing to stop
+	return 0
+}

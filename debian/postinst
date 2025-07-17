@@ -1,11 +1,32 @@
 #!/usr/bin/env bash
 
-# -- Exit on errors.
+#############################################################################################################################################################################
+#   The license used for this file and its contents is: BSD-3-Clause                                                                                                        #
+#                                                                                                                                                                           #
+#   Copyright <2025> <Uri Herrera <uri_herrera@nxos.org>>                                                                                                                   #
+#                                                                                                                                                                           #
+#   Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:                          #
+#                                                                                                                                                                           #
+#    1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.                                        #
+#                                                                                                                                                                           #
+#    2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer                                      #
+#       in the documentation and/or other materials provided with the distribution.                                                                                         #
+#                                                                                                                                                                           #
+#    3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software                    #
+#       without specific prior written permission.                                                                                                                          #
+#                                                                                                                                                                           #
+#    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,                      #
+#    THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS                  #
+#    BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE                 #
+#    GOODS OR SERVICES; LOSS OF USE, DATA,   OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,                      #
+#    STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.   #
+#############################################################################################################################################################################
 
 
 # -- Add link for init PID 1.
 
 ln -sv /sbin/openrc-init /sbin/init
+
 
 # -- Edit vanilla rc.conf with our default values.
 
@@ -22,12 +43,46 @@ sed -i 's/#rc_controller_cgroups="YES"/rc_controller_cgroups="YES"/g' /etc/rc.co
 sed -i 's/#rc_cgroup_mode="unified"/rc_cgroup_mode="unified"/g' /etc/rc.conf
 sed -i 's/#rc_cgroup_controllers=""/rc_cgroup_controllers="cgroup_root openrc none cpuset cpu cpuacct blkio io memory devices freezer net_cls perf_event net_prio hugetlb pids rdma misc cgroup"/g' /etc/rc.conf
 
+
+# -- Explicitly control shutdown and boot options.
+
+cat << 'EOF' >> /etc/rc.conf
+
+# Set to "poweroff" (default) or "halt".
+rc_halt_action="poweroff"
+
+# Set to "YES" (default) to shut down network interfaces before halting.
+rc_down_interfaces="YES"
+
+# Set to "YES" to create /run/nologin at boot to delay user logins.
+rc_delaylogin="YES"
+
+# Set to "YES" to force fsck to run even if the filesystem seems clean.
+# rc_force_fsck="NO"
+
+# Set to "YES" to have fsck automatically fix errors without asking (-y).
+# If "NO" (default), it will only fix safe errors (-a).
+# rc_fsck_fix="NO"
+
+# Set to "YES" to get a maintenance shell (sulogin) before boot.
+# rc_sulogin="NO"
+EOF
+
+
 # -- Add ttys.
 
 for i in {2..7}; do
   ln -sv "/etc/init.d/agetty" "/etc/init.d/agetty.tty${i}"
   rc-update add "agetty.tty${i}" default
 done
+
+
+# -- Edit vanilla agetty with our default values.
+
+sed -i 's/#baud=""/baud="38400"/g' /etc/conf.d/agetty
+sed -i 's/#term_type="linux"/term_type="linux"/g' /etc/conf.d/agetty
+sed -i 's/#agetty_options=""/agetty_options="-pl /bin/login"/g' /etc/conf.d/agetty
+
 
 # -- Update services list.
 

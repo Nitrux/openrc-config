@@ -1,0 +1,29 @@
+#!/sbin/openrc-run
+# Copyright (c) 2007-2021 The Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+description="Unmounts all non-essential filesystems"
+
+depend() {
+	# The 'after *' directive ensures this service runs after all
+	# other services in the shutdown runlevel have stopped.
+	after *
+	# This provides the 'umountfs' virtual service.
+	provide umountfs
+}
+
+start() {
+	# This script only has a 'stop' action, which runs at shutdown.
+	return 0
+}
+
+stop() {
+	ebegin "Unmounting filesystems"
+
+	# Unmount all filesystems (-a) except for network filesystems
+	# (which are handled by their own services) and kernel virtual
+	# filesystems. The -r flag attempts to remount read-only on failure.
+	umount -a -r -t "nonfs,nfs4,smbfs,cifs,ncp,ncpfs,coda,ocfs2,gfs,gfs2,ceph"
+
+	eend $?
+}

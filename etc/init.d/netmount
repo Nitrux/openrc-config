@@ -1,0 +1,31 @@
+#!/sbin/openrc-run
+# Copyright (c) 2007-2021 The Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+description="Mounts network filesystems"
+
+depend() {
+	# This is the key: it needs the 'net' virtual service to be
+	# provided by your main network service (e.g., net.eth0).
+	need net
+	# It should also run after local filesystems are mounted.
+	after localmount
+	# Add dependencies for any required services, like NFS.
+	use nfs
+}
+
+start() {
+	ebegin "Mounting network filesystems"
+
+	# The -O _netdev option tells mount to only mount filesystems
+	# that have the _netdev option in /etc/fstab. The list of
+	# types is for filesystems that are implicitly network-based.
+	mount -a -t nfs,nfs4,smbfs,cifs,ncp,ncpfs,ceph -O _netdev
+
+	eend $?
+}
+
+stop() {
+	# Unmounting is handled by the 'umountfs' shutdown service.
+	return 0
+}

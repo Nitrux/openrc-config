@@ -1,0 +1,37 @@
+#!/sbin/openrc-run
+# Copyright (c) 2008-2021 The Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+description="Mounts the configfs kernel virtual filesystem"
+
+depend() {
+	# Needs /sys to be mounted first.
+	need sysfs
+	# Should run after modules are loaded, as configfs is often a module.
+	use modules
+}
+
+start() {
+	local mountpoint="/sys/kernel/config"
+
+	# Exit if the kernel doesn't support configfs or the module isn't loaded.
+	# The directory will not exist in that case.
+	if [ ! -d "${mountpoint}" ]; then
+		einfo "Configfs support is not available."
+		return 0
+	fi
+
+	# The `mountinfo` command is an OpenRC helper to check if a path is mounted.
+	if mountinfo --quiet "${mountpoint}"; then
+		return 0
+	fi
+
+	ebegin "Mounting configfs virtual filesystem"
+	mount -t configfs none "${mountpoint}"
+	eend $?
+}
+
+stop() {
+	# Unmounting is handled globally by the 'umountfs' shutdown service.
+	return 0
+}

@@ -1,0 +1,24 @@
+#!/sbin/openrc-run
+# Copyright (c) 2007-2021 The Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+description="Activates and deactivates swap partitions and files"
+
+depend() {
+	# Swap files may live on other filesystems
+	after localmount
+	# The root service must run first
+	need root
+}
+
+start() {
+	ebegin "Activating swap partitions and files"
+	swapon -a
+	eend $?
+}
+
+stop() {
+	ebegin "Deactivating swap partitions and files"
+	swapoff -a
+	eend $?
+}

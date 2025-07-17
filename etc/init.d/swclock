@@ -1,0 +1,31 @@
+#!/sbin/openrc-run
+# Copyright (c) 2007-2021 The Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+description="Sets the system clock from the hardware clock"
+
+depend() {
+	# Needs the hwclock service to be available, which provides the command
+	# and ensures /dev is ready.
+	need hwclock
+	# Must run before services that rely on accurate time.
+	before
+}
+
+start() {
+	# Check if we should set the clock at all (can be disabled in conf.d)
+	if ! yesno "${clock_hctosys}"; then
+		einfo "Not setting system clock from hardware clock (see /etc/conf.d/hwclock)."
+		return 0
+	fi
+
+	ebegin "Setting system clock from the hardware clock"
+	# The --hctosys option sets the system time from the hardware clock.
+	# Other options like --utc or --localtime are passed in from conf.d.
+	eval /sbin/hwclock --hctosys ${clock_opts}
+	eend $?
+}
+
+stop() {
+	return 0
+}

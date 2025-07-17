@@ -1,0 +1,23 @@
+#!/sbin/openrc-run
+
+description="Run /etc/rc.local if it exists"
+
+depend() {
+    after mountall
+}
+
+start() {
+    if [ -x /etc/rc.local ]; then
+        ebegin "Running local boot scripts (/etc/rc.local)"
+        /etc/rc.local
+        eend $?
+    fi
+}
+
+stop() {
+    if [ -x /etc/rc.shutdown ]; then
+        ebegin "Running local shutdown scripts (/etc/rc.shutdown)"
+        /etc/rc.shutdown
+        eend $?
+    fi
+}

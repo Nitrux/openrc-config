@@ -1,0 +1,55 @@
+#!/sbin/openrc-run
+# Copyright (c) 2007-2021 The Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+description="Manages the /dev filesystem and its sub-filesystems"
+
+depend() {
+	# Needs /proc and /sys to be mounted first
+	need procfs sysfs
+	# This script provides the 'dev' virtual service
+	provide dev
+}
+
+start() {
+	ebegin "Mounting the /dev filesystem"
+
+	# 1. Mount devtmpfs on /dev if supported and not already mounted.
+	# This provides a dynamic /dev populated by the kernel.
+	if ! mountinfo -q /dev && grep -q devtmpfs /proc/filesystems; then
+		mount -t devtmpfs -o mode=0755,nosuid devtmpfs /dev
+		if [ $? -ne 0 ]; then
+			eend 1 "Failed to mount /dev"
+			return 1
+		fi
+	fi
+
+	# 2. Ensure standard I/O symlinks are present.
+	ln -sf /proc/self/fd /dev/fd
+	ln -sf fd/0 /dev/stdin
+	ln -sf fd/1 /dev/stdout
+	ln -sf fd/2 /dev/stderr
+
+	# 3. Mount /dev/pts for pseudo-terminals.
+	if [ ! -d /dev/pts ]; then
+		mkdir -p /dev/pts
+		chmod 0755 /dev/pts
+	fi
+	if ! mountinfo -q /dev/pts; then
+		mount -t devpts -o noexec,nosuid,gid=5,mode=620 devpts /dev/pts
+	fi
+
+	# 4. Mount /dev/shm for POSIX shared memory.
+	if ! mountinfo -q /dev/shm; then
+		mount -t tmpfs -o nodev,nosuid,noexec tmpfs /dev/shm
+	fi
+	# Set sticky bit for shared memory.
+	chmod 1777 /dev/shm
+
+	eend 0
+}
+
+stop() {
+	# Unmounting is handled globally by the 'umountfs' shutdown service.
+	return 0
+}

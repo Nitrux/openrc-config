@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+# This script runs at the end of the boot process to enable user logins.
+
+# Check if login delaying is enabled in /etc/rc.conf
+if yesno "${rc_delaylogin}"; then
+	# Remove the nologin file to allow users to log in.
+	rm -f /run/nologin
+fi

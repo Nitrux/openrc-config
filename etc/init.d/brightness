@@ -1,0 +1,102 @@
+#!/sbin/openrc-run
+# Copyright (c) 2008-2020 The Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+description="Saves and restores screen brightness"
+
+# The original SysV script stored state here.
+# A more OpenRC-native path might be /var/lib/openrc/brightness.
+readonly SAVEDIR=/var/lib/initscripts
+readonly SAVEFILE_PREFIX="${SAVEDIR}/brightness"
+
+# List of backlight devices to check, in "label:path" format.
+# An empty label is for a generic device, others are specific.
+readonly BACKLIGHT_DEVICES=(
+	":/sys/class/backlight/acpi_video0"
+	"intel:/sys/class/backlight/intel_backlight"
+	# You can add other devices here, e.g.:
+	# "amdgpu:/sys/class/backlight/amdgpu_bl0"
+)
+
+depend() {
+	need localmount
+}
+
+# Helper function to iterate over all backlight devices and perform an action.
+_invoke() {
+	local action=$1
+	local overall_rc=0
+
+	for device_info in "${BACKLIGHT_DEVICES[@]}"; do
+		# Parse "label:path"
+		local label="${device_info%%:*}"
+		local path="${device_info#*:}"
+		local knob="${path}/brightness"
+		local max_knob="${path}/max_brightness"
+		local savefile="${SAVEFILE_PREFIX}${label:+.${label}}"
+
+		# Skip if the backlight device does not exist
+		[ -e "${knob}" ] || continue
+
+		# Call the appropriate function for the action
+		case "$action" in
+			start)
+				einfo "Restoring brightness for ${label:-default} device..."
+				if [ -f "${savefile}" ]; then
+					cat "${savefile}" > "${knob}"
+				else
+					cat "${max_knob}" > "${knob}"
+				fi
+				;;
+			stop)
+				local current_brightness
+				current_brightness=$(cat "${knob}")
+
+				# Don't save if brightness is 0 to avoid a blank screen on reboot
+				if [ "${current_brightness}" -eq 0 ]; then
+					einfo "Brightness for ${label:-default} is 0, not saving."
+					continue
+				fi
+
+				einfo "Saving brightness for ${label:-default} device..."
+				cat "${knob}" > "${savefile}"
+				;;
+			status)
+				einfo "Status for ${label:-default} device (${path}):"
+				einfo "  Current brightness: $(cat "${knob}")"
+				if [ -f "${savefile}" ]; then
+					einfo "  Saved brightness:   $(cat "${savefile}")"
+				else
+					ewarn "  No saved value found."
+				fi
+				;;
+		esac
+		
+		# Track if any operation failed
+		local rc=$?
+		if [ ${rc} -ne 0 ]; then
+			overall_rc=${rc}
+		fi
+	done
+	return ${overall_rc}
+}
+
+start() {
+	ebegin "Restoring screen brightness levels"
+	mkdir -p "${SAVEDIR}"
+	_invoke "start"
+	eend $?
+}
+
+stop() {
+	ebegin "Saving screen brightness levels"
+	mkdir -p "${SAVEDIR}"
+	_invoke "stop"
+	eend $?
+}
+
+status() {
+	# Status provides information but doesn't indicate a running service.
+	_invoke "status"
+	return 0
+}
