@@ -6,7 +6,7 @@ description="Saves boot messages to /var/log/dmesg"
 
 depend() {
 	# We need local filesystems mounted to write to /var/log
-	need mountall
+	need localmount
 }
 
 start() {
