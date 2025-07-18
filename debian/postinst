@@ -84,6 +84,100 @@ sed -i 's/#term_type="linux"/term_type="linux"/g' /etc/conf.d/agetty
 sed -i 's/#agetty_options=""/agetty_options="-pl /bin/login"/g' /etc/conf.d/agetty
 
 
-# -- Update services list.
+# -- Add services to the appropriate runlevels using rc-update.
+
+echo "Adding OpenRC services to runlevels..."
+
+INIT_D_DIR="/etc/init.d"
+
+ls -lath "$INIT_D_DIR"
+
+
+# -------------------------------------------------------------------------------------------------------------------------------------------------#
+# ## System Initialization (sysinit)                                                                                                               #
+# -- These services run first to prepare the base system (mounting /proc, /sys, /dev, starting udev, etc.).                                        #
+# -------------------------------------------------------------------------------------------------------------------------------------------------#
+rc-update add apparmor-openrc sysinit
+rc-update add bootmisc sysinit
+rc-update add cgroups sysinit
+rc-update add dev sysinit
+rc-update add hostname sysinit
+rc-update add modules sysinit
+rc-update add procfs sysinit
+rc-update add sysctl sysinit
+rc-update add sysfs sysinit
+rc-update add udev sysinit
+
+
+# -------------------------------------------------------------------------------------------------------------------------------------------------#
+# ## Boot-time Services (boot)                                                                                                                     #
+# -- These services run after sysinit to mount filesystems, load seeds, etc.                                                                       #
+# -------------------------------------------------------------------------------------------------------------------------------------------------#
+rc-update add bootlogs boot
+rc-update add brightness boot
+rc-update add configfs boot
+rc-update add cryptmount boot
+rc-update add device-mapper boot
+rc-update add dmcrypt boot
+rc-update add dmeventd boot
+rc-update add fsck boot
+rc-update add localmount boot
+rc-update add root boot
+rc-update add swap boot
+rc-update add swclock boot
+rc-update add urandom boot
+
+
+# -------------------------------------------------------------------------------------------------------------------------------------------------#
+# ## Main Services (default)                                                                                                                       #
+# -- These are the standard, user-facing services that run in a normal multi-user session.                                                         #
+# -------------------------------------------------------------------------------------------------------------------------------------------------#
+rc-update add acpi-support-openrc default
+rc-update add acpid-openrc default
+rc-update add dbus-openrc default
+rc-update add debugfs default
+rc-update add elogind-openrc default
+rc-update add greetd default
+rc-update add local default
+rc-update add mountbinds default
+rc-update add netmount default
+rc-update add network-manager default
+rc-update add nohang-desktop-openrc default
+rc-update add ntpsec-openrc default
+rc-update add plymouth-openrc default
+rc-update add power-profiles-daemon-openrc default
+rc-update add powertop default
+rc-update add sudo default
+rc-update add uuidd default
+
+
+# ------------------------------------------------------------------------------------------------------------------------------------------------#
+# ## Asynchronous Services (async)                                                                                                                #
+# -- A custom runlevel for services that can start in the background.                                                                             #
+# ------------------------------------------------------------------------------------------------------------------------------------------------#
+rc-update add bcm-drv async
+rc-update add bluetooth-meshd-openrc async
+rc-update add bluetooth-obexd-openrc async
+rc-update add bluetooth-openrc async
+rc-update add cron-openrc async
+rc-update add nvidia-powerd async
+rc-update add rapl-power async
+rc-update add rsyslog-openrc async
+rc-update add thp-settings async
+rc-update add usbmuxd async
+
+
+# ------------------------------------------------------------------------------------------------------------------------------------------------- #
+# ## Shutdown Services (shutdown)                                                                                                                   #
+# -- These services have `stop()` actions that run when the system is halting or rebooting.                                                         #
+# ------------------------------------------------------------------------------------------------------------------------------------------------- #
+rc-update add brightness shutdown
+rc-update add hwclock shutdown
+rc-update add savecache shutdown
+rc-update add umountfs shutdown
+rc-update add urandom shutdown
+
+
+# -- Rebuild the dependency tree after making all changes.
 
 rc-update -u

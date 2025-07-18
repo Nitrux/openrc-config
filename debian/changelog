@@ -1,6 +1,12 @@
+openrc-config (0.7.8)  nitrux; urgency=high
+
+  * Workaround Debian's purposedly broken OpenRC package.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Fri, 18 Jul 2025 02:22:00 -0500
+
 openrc-config (0.7.7)  nitrux; urgency=high
 
-  * Workaround Debian's purposedly broken OpenRC packaging.
+  * Workaround Debian's purposedly broken OpenRC package.
 
  -- Uri Herrera <uri_herrera@nxos.org>  Fri, 18 Jul 2025 00:50:00 -0500
 

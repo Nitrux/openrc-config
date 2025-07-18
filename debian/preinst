@@ -32,60 +32,6 @@ $(which rm) -f /etc/runlevels/default/* \
     /etc/runlevels/sysinit/*
 
 
-# -- Define the base directory for init scripts.
-
-INIT_D_DIR="/etc/init.d"
-
-ls -lath "$INIT_D_DIR"
-
-
 # -- Create custom runlevel "async" directory if it doesn't exist and stack it to default.
 
 mkdir -p /etc/runlevels/async && rc-update -s add async default
-
-
-# -----------------------------------------------------------------------------
-# ## System Initialization (sysinit)
-# -----------------------------------------------------------------------------
-echo "Populating sysinit runlevel..."
-
-$(which cp) "${INIT_D_DIR}"/{apparmor-openrc,bootmisc,cgroups,dev,hostname,modules,procfs,sysctl,sysfs,udev} /etc/runlevels/sysinit/
-
-
-# -----------------------------------------------------------------------------
-# ## Boot-time Services (boot)
-# -----------------------------------------------------------------------------
-echo "Populating boot runlevel..."
-
-$(which cp) "${INIT_D_DIR}"/{bootlogs,brightness,configfs,cryptmount,device-mapper,dmcrypt,dmeventd,fsck,localmount,root,swap,swclock,urandom} /etc/runlevels/boot/
-
-
-# -----------------------------------------------------------------------------
-# ## Main Services (default)
-# -----------------------------------------------------------------------------
-echo "Populating default runlevel..."
-
-$(which cp) "${INIT_D_DIR}"/{acpi-support-openrc,acpid-openrc,dbus-openrc,debugfs,elogind-openrc,greetd,local,mountbinds,netmount,network-manager,nohang-desktop-openrc,ntpsec-openrc,plymouth-openrc,power-profiles-daemon-openrc,powertop,sudo,uuidd} /etc/runlevels/default/
-
-
-# -----------------------------------------------------------------------------
-# ## Asynchronous Services (async)
-# -----------------------------------------------------------------------------
-echo "Populating async runlevel..."
-
-$(which cp) "${INIT_D_DIR}"/{bcm-drv,bluetooth-meshd-openrc,bluetooth-obexd-openrc,bluetooth-openrc,cron-openrc,nvidia-powerd,rapl-power,rsyslog-openrc,thp-settings,usbmuxd} /etc/runlevels/async/
-
-
-# -----------------------------------------------------------------------------
-# ## Shutdown Services (shutdown)
-# -----------------------------------------------------------------------------
-echo "Populating shutdown runlevel..."
-
-$(which cp) "${INIT_D_DIR}"/{brightness,hwclock,savecache,umountfs,urandom} /etc/runlevels/async/
-
-# -----------------------------------------------------------------------------
-# ## Rebuild the dependency tree for the boot order to be correct.
-# -----------------------------------------------------------------------------
-echo "Rebuilding OpenRC dependency cache..."
-
-rc-update -u
