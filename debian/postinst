@@ -96,7 +96,7 @@ rc-update add apparmor-openrc sysinit
 rc-update add bootmisc sysinit
 rc-update add cgroups sysinit
 rc-update add dev sysinit
-rc-update add eudev sysinit
+rc-update add eudev-openrc sysinit
 rc-update add hostname sysinit
 rc-update add modules sysinit
 rc-update add procfs sysinit
