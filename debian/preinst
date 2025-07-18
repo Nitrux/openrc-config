@@ -32,6 +32,11 @@ rm -f /etc/runlevels/default/* \
     /etc/runlevels/sysinit/*
 
 
+# -- Define the base directory for init scripts.
+
+INIT_D_DIR="/etc/init.d"
+
+
 # -- Whitelist of init scripts used in runlevels.
 
 used_services=(
@@ -103,11 +108,6 @@ done
 # -- Create custom runlevel "async" directory if it doesn't exist and stack it to default.
 
 mkdir -p /etc/runlevels/async && rc-update -s add async default
-
-
-# -- Define the base directory for init scripts.
-
-INIT_D_DIR="/etc/init.d"
 
 
 # -----------------------------------------------------------------------------
