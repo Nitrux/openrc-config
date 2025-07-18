@@ -1,14 +1,20 @@
+openrc-config (0.8.7)  nitrux; urgency=high
+
+  * Move eudev service to its own package.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Fri, 18 Jul 2025 17:07:00 -0500
+
 openrc-config (0.8.6)  nitrux; urgency=high
 
   * Rename udev to eudev and make it use eudev.
 
- -- Uri Herrera <uri_herrera@nxos.org>  Fri, 18 Jul 2025 06:-4:00 -0500
+ -- Uri Herrera <uri_herrera@nxos.org>  Fri, 18 Jul 2025 06:44:00 -0500
 
 openrc-config (0.8.5)  nitrux; urgency=high
 
   * Fix postinst.
 
- -- Uri Herrera <uri_herrera@nxos.org>  Fri, 18 Jul 2025 06:-4:00 -0500
+ -- Uri Herrera <uri_herrera@nxos.org>  Fri, 18 Jul 2025 06:34:00 -0500
 
 openrc-config (0.8.4)  nitrux; urgency=high
 
