@@ -88,11 +88,6 @@ sed -i 's/#agetty_options=""/agetty_options="-pl /bin/login"/g' /etc/conf.d/aget
 
 echo "Adding OpenRC services to runlevels..."
 
-INIT_D_DIR="/etc/init.d"
-
-ls -lath "$INIT_D_DIR"
-
-
 # -------------------------------------------------------------------------------------------------------------------------------------------------#
 # ## System Initialization (sysinit)                                                                                                               #
 # -- These services run first to prepare the base system (mounting /proc, /sys, /dev, starting udev, etc.).                                        #

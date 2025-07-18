@@ -1,3 +1,9 @@
+openrc-config (0.7.9)  nitrux; urgency=high
+
+  * Remove SysV scripts because they cause issues when updating the services.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Fri, 18 Jul 2025 02:43:00 -0500
+
 openrc-config (0.7.8)  nitrux; urgency=high
 
   * Workaround Debian's purposedly broken OpenRC package.
