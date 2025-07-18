@@ -26,7 +26,7 @@
 
 # -- Clear all runlevels to ensure a clean state.
 
-rm -f /etc/runlevels/default/* \
+$(which rm) -f /etc/runlevels/default/* \
     /etc/runlevels/shutdown/* \
     /etc/runlevels/boot/* \
     /etc/runlevels/sysinit/*
@@ -100,7 +100,7 @@ used_services=(
 for f in "${INIT_D_DIR}"/*; do
   fname="$(basename "$f")"
   if [[ ! " ${used_services[*]} " =~ ${fname} ]]; then
-    /bin/rm -f "$f"
+    $(which rm) -f "$f"
   fi
 done
 
@@ -115,7 +115,7 @@ mkdir -p /etc/runlevels/async && rc-update -s add async default
 # -----------------------------------------------------------------------------
 echo "Populating sysinit runlevel..."
 
-cp "${INIT_D_DIR}"/{apparmor-openrc,bootmisc,cgroups,dev,hostname,modules,procfs,sysctl,sysfs,udev} /etc/runlevels/sysinit/
+$(which cp) "${INIT_D_DIR}"/{apparmor-openrc,bootmisc,cgroups,dev,hostname,modules,procfs,sysctl,sysfs,udev} /etc/runlevels/sysinit/
 
 
 # -----------------------------------------------------------------------------
@@ -123,7 +123,7 @@ cp "${INIT_D_DIR}"/{apparmor-openrc,bootmisc,cgroups,dev,hostname,modules,procfs
 # -----------------------------------------------------------------------------
 echo "Populating boot runlevel..."
 
-cp "${INIT_D_DIR}"/{bootlogs,brightness,configfs,cryptmount,device-mapper,dmcrypt,dmeventd,fsck,localmount,root,swap,swclock,urandom} /etc/runlevels/boot/
+$(which cp) "${INIT_D_DIR}"/{bootlogs,brightness,configfs,cryptmount,device-mapper,dmcrypt,dmeventd,fsck,localmount,root,swap,swclock,urandom} /etc/runlevels/boot/
 
 
 # -----------------------------------------------------------------------------
@@ -131,7 +131,7 @@ cp "${INIT_D_DIR}"/{bootlogs,brightness,configfs,cryptmount,device-mapper,dmcryp
 # -----------------------------------------------------------------------------
 echo "Populating default runlevel..."
 
-cp "${INIT_D_DIR}"/{acpi-support-openrc,acpid-openrc,dbus-openrc,debugfs,elogind-openrc,greetd,local,mountbinds,netmount,network-manager,nohang-desktop-openrc,ntpsec-openrc,plymouth-openrc,power-profiles-daemon-openrc,powertop,sudo,uuidd} /etc/runlevels/default/
+$(which cp) "${INIT_D_DIR}"/{acpi-support-openrc,acpid-openrc,dbus-openrc,debugfs,elogind-openrc,greetd,local,mountbinds,netmount,network-manager,nohang-desktop-openrc,ntpsec-openrc,plymouth-openrc,power-profiles-daemon-openrc,powertop,sudo,uuidd} /etc/runlevels/default/
 
 
 # -----------------------------------------------------------------------------
@@ -139,7 +139,7 @@ cp "${INIT_D_DIR}"/{acpi-support-openrc,acpid-openrc,dbus-openrc,debugfs,elogind
 # -----------------------------------------------------------------------------
 echo "Populating async runlevel..."
 
-cp "${INIT_D_DIR}"/{bcm-drv,bluetooth-meshd-openrc,bluetooth-obexd-openrc,bluetooth-openrc,cron-openrc,nvidia-powerd,rapl-power,rsyslog-openrc,thp-settings,usbmuxd} /etc/runlevels/async/
+$(which cp) "${INIT_D_DIR}"/{bcm-drv,bluetooth-meshd-openrc,bluetooth-obexd-openrc,bluetooth-openrc,cron-openrc,nvidia-powerd,rapl-power,rsyslog-openrc,thp-settings,usbmuxd} /etc/runlevels/async/
 
 
 # -----------------------------------------------------------------------------
@@ -147,7 +147,7 @@ cp "${INIT_D_DIR}"/{bcm-drv,bluetooth-meshd-openrc,bluetooth-obexd-openrc,blueto
 # -----------------------------------------------------------------------------
 echo "Populating shutdown runlevel..."
 
-cp "${INIT_D_DIR}"/{brightness,hwclock,savecache,umountfs,urandom} /etc/runlevels/async/
+$(which cp) "${INIT_D_DIR}"/{brightness,hwclock,savecache,umountfs,urandom} /etc/runlevels/async/
 
 # -----------------------------------------------------------------------------
 # ## Rebuild the dependency tree for the boot order to be correct.
