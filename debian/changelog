@@ -1,3 +1,9 @@
+openrc-config (0.8.0)  nitrux; urgency=high
+
+  * Update greetd service name.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Fri, 18 Jul 2025 03:13:00 -0500
+
 openrc-config (0.7.9)  nitrux; urgency=high
 
   * Remove SysV scripts because they cause issues when updating the services.
