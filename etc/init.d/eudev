@@ -1,0 +1,51 @@
+#!/sbin/openrc-run
+# Copyright (c) 2007-2021 The Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+description="Starts the eudev daemon to manage device nodes"
+command="/usr/sbin/udevd"
+command_args="--daemon ${eudev_opts}"
+pidfile="/run/udev.pid"
+
+depend() {
+	need dev procfs sysfs
+	provide udev
+}
+
+start_pre() {
+	if [ -w /sys/kernel/uevent_helper ]; then
+		echo > /sys/kernel/uevent_helper
+	fi
+	udevadm info --cleanup-db >/dev/null 2>&1
+}
+
+start() {
+	ebegin "Starting eudev"
+	start-stop-daemon --start --pidfile "${pidfile}" --make-pidfile \
+		--exec "${command}" -- ${command_args}
+	eend $? "Failed to start eudev daemon" || return 1
+
+	ebegin "Triggering udev events"
+	udevadm trigger --type=subsystems --action=add
+	udevadm trigger --type=devices --action=add
+	eend $?
+
+	ebegin "Waiting for udev to settle"
+	if udevadm settle; then
+		eend 0
+	else
+		eend 0 "udevadm settle timed out, continuing boot"
+	fi
+}
+
+stop() {
+	ebegin "Stopping eudev"
+	start-stop-daemon --stop --pidfile "${pidfile}"
+	eend $?
+}
+
+reload() {
+	ebegin "Reloading eudev rules"
+	udevadm control --reload-rules
+	eend $?
+}

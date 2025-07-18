@@ -1,0 +1,6 @@
+# /etc/conf.d/eudev
+
+# Extra command-line arguments for the eudev daemon.
+# This variable is now corrected:
+#
+# eudev_opts="--debug"
