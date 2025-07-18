@@ -1,3 +1,9 @@
+openrc-config (0.8.4)  nitrux; urgency=high
+
+  * Fix brightness service.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Fri, 18 Jul 2025 05:42:00 -0500
+
 openrc-config (0.8.3)  nitrux; urgency=high
 
   * Fix services provides.
