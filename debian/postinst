@@ -84,11 +84,6 @@ sed -i 's/#term_type="linux"/term_type="linux"/g' /etc/conf.d/agetty
 sed -i 's/#agetty_options=""/agetty_options="-pl /bin/login"/g' /etc/conf.d/agetty
 
 
-# -- Delete these Sysv scripts, otherwise they cause conflicts when updating the service dependencies.
-
-$(which rm) -f "/etc/init.d/{cryptdisks,cryptdisks-early,eudev,procps,rsyslog}"
-
-
 # -- Add services to the appropriate runlevels using rc-update.
 
 echo "Adding OpenRC services to runlevels..."
@@ -145,7 +140,7 @@ rc-update add network-manager default
 rc-update add nohang-desktop-openrc default
 rc-update add ntpsec-openrc default
 rc-update add plymouth-openrc default
-rc-update add power-profiles-daemon-openrc default
+rc-update add power-profiles-daemon default
 rc-update add powertop default
 rc-update add sudo default
 rc-update add uuidd default
