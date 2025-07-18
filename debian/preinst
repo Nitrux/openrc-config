@@ -119,11 +119,11 @@ rc-update add usbmuxd async
 # ## Shutdown Services (shutdown)                                                                                                                   #
 # -- These services have `stop()` actions that run when the system is halting or rebooting.                                                         #
 # ------------------------------------------------------------------------------------------------------------------------------------------------- #
-rc-update add umountfs shutdown
-rc-update add hwclock shutdown
-rc-update add urandom shutdown
 rc-update add brightness shutdown
+rc-update add hwclock shutdown
 rc-update add savecache shutdown 
+rc-update add umountfs shutdown
+rc-update add urandom shutdown
 
 
 # -- Rebuild the dependency tree after making all changes.
