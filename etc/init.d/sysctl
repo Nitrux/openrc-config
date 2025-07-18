@@ -1,0 +1,22 @@
+#!/sbin/openrc-run
+# Copyright (c) 2007-2021 The Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+description="Configures kernel parameters from sysctl.conf"
+
+depend() {
+	# Needs /proc and /sys to be mounted to modify kernel parameters.
+	need procfs sysfs
+}
+
+start() {
+	ebegin "Applying kernel sysctl settings"
+	# The --system flag tells sysctl to load all standard config files.
+	/sbin/sysctl --system
+	eend $?
+}
+
+stop() {
+	# This is a one-shot service, there is nothing to stop.
+	return 0
+}

@@ -1,23 +1,53 @@
 #!/sbin/openrc-run
+# Copyright (c) 2007-2021 The Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
 
-description="Run /etc/rc.local if it exists"
+description="Runs local startup and shutdown scripts"
 
 depend() {
-    after mountall
+	# 'need' with no arguments tells OpenRC to try to start this service
+	# after all other services in this runlevel have been started.
+	need
+	# This provides the 'local' virtual service.
+	provide local
 }
 
 start() {
-    if [ -x /etc/rc.local ]; then
-        ebegin "Running local boot scripts (/etc/rc.local)"
-        /etc/rc.local
-        eend $?
-    fi
+	ebegin "Running local startup scripts"
+	local SCRIPT
+
+	# Modern OpenRC method: run all executable *.start scripts
+	if [ -d /etc/local.d ]; then
+		for SCRIPT in /etc/local.d/*.start; do
+			[ -f "${SCRIPT}" ] && [ -x "${SCRIPT}" ] && "${SCRIPT}"
+		done
+	fi
+
+	# Compatibility for the traditional /etc/rc.local file
+	if [ -x /etc/rc.local ]; then
+		veinfo "Running compatibility script /etc/rc.local"
+		/etc/rc.local
+	fi
+
+	eend 0
 }
 
 stop() {
-    if [ -x /etc/rc.shutdown ]; then
-        ebegin "Running local shutdown scripts (/etc/rc.shutdown)"
-        /etc/rc.shutdown
-        eend $?
-    fi
+	ebegin "Running local shutdown scripts"
+	local SCRIPT
+
+	# Modern OpenRC method: run all executable *.stop scripts in reverse order
+	if [ -d /etc/local.d ]; then
+		for SCRIPT in $(find /etc/local.d/ -maxdepth 1 -type f -name "*.stop" | sort -r); do
+			[ -x "${SCRIPT}" ] && "${SCRIPT}"
+		done
+	fi
+
+	# Compatibility for a shutdown script
+	if [ -x /etc/rc.shutdown ]; then
+		veinfo "Running compatibility script /etc/rc.shutdown"
+		/etc/rc.shutdown
+	fi
+
+	eend 0
 }

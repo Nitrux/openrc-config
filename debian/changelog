@@ -2,8 +2,10 @@ openrc-config (0.7.5)  nitrux; urgency=high
 
   * Add init scripts to replace initscripts.
   * Update maintainer scripts to improve how the services and expose options in rc.conf.
+  * Update service names.
+  * Remove unused files in /etc/conf.d/.
 
- -- Uri Herrera <uri_herrera@nxos.org>  Thu, 17 Jul 2025 05:19:00 -0500
+ -- Uri Herrera <uri_herrera@nxos.org>  Thu, 17 Jul 2025 05:52:00 -0500
 
 openrc-config (0.7.4)  nitrux; urgency=high
 
