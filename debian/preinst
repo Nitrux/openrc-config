@@ -82,9 +82,9 @@ rc-update add urandom boot
 # -------------------------------------------------------------------------------------------------------------------------------------------------#
 rc-update add acpi-support-openrc default
 rc-update add acpid-openrc default
-rc-update add dbus default
+rc-update add dbus-openrc default
 rc-update add debugfs default
-rc-update add elogind default
+rc-update add elogind-openrc default
 rc-update add greetd default
 rc-update add local default
 rc-update add mountbinds default
@@ -121,7 +121,7 @@ rc-update add usbmuxd async
 # ------------------------------------------------------------------------------------------------------------------------------------------------- #
 rc-update add brightness shutdown
 rc-update add hwclock shutdown
-rc-update add savecache shutdown 
+rc-update add savecache shutdown
 rc-update add umountfs shutdown
 rc-update add urandom shutdown
 
