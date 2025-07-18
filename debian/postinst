@@ -81,7 +81,7 @@ done
 
 sed -i 's/#baud=""/baud="38400"/g' /etc/conf.d/agetty
 sed -i 's/#term_type="linux"/term_type="linux"/g' /etc/conf.d/agetty
-sed -i 's/#agetty_options=""/agetty_options="-pl /bin/login"/g' /etc/conf.d/agetty
+sed -i 's|#agetty_options=""|agetty_options="-pl /bin/login"|g' /etc/conf.d/agetty
 
 
 # -- Add services to the appropriate runlevels using rc-update.
