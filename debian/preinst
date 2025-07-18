@@ -36,73 +36,7 @@ $(which rm) -f /etc/runlevels/default/* \
 
 INIT_D_DIR="/etc/init.d"
 
-
-# -- Whitelist of init scripts used in runlevels.
-
-used_services=(
-    apparmor-openrc
-    acpi-support-openrc
-    acpid-openrc
-    bcm-drv
-    bluetooth-meshd-openrc
-    bluetooth-obexd-openrc
-    bluetooth-openrc
-    bootlogs
-    bootmisc
-    brightness
-    cgroups
-    configfs
-    cron-openrc
-    cryptmount
-    dbus-openrc
-    debugfs
-    dev
-    device-mapper
-    dmcrypt
-    dmeventd
-    elogind-openrc
-    fsck
-    greetd
-    hostname
-    hwclock
-    local
-    localmount
-    modules
-    mountbinds
-    netmount
-    network-manager
-    nohang-desktop-openrc
-    ntpsec-openrc
-    nvidia-powerd
-    plymouth-openrc
-    power-profiles-daemon-openrc
-    powertop
-    procfs
-    rapl-power
-    root
-    rsyslog-openrc
-    savecache
-    sudo
-    swap
-    swclock
-    sysctl
-    sysfs
-    thp-settings
-    udev
-    umountfs
-    urandom
-    usbmuxd
-)
-
-
-# -- Delete all other files in /etc/init.d.
-
-for f in "${INIT_D_DIR}"/*; do
-  fname="$(basename "$f")"
-  if [[ ! " ${used_services[*]} " =~ ${fname} ]]; then
-    $(which rm) -f "$f"
-  fi
-done
+ls -lath "$INIT_D_DIR"
 
 
 # -- Create custom runlevel "async" directory if it doesn't exist and stack it to default.
