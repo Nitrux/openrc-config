@@ -35,10 +35,3 @@ $(which rm) -f /etc/runlevels/default/* \
 # -- Create custom runlevel "async" directory if it doesn't exist and stack it to default.
 
 mkdir -p /etc/runlevels/async && rc-update -s add async default
-
-
-# -- Delete these Sysv scripts, otherwise they cause conflicts when updating the service dependencies.
-
-INIT_D_DIR="/etc/init.d"
-
-$(which rm) -f "$INIT_D_DIR/{cryptdisks,cryptdisks-early,eudev,procps,rsyslog}"
