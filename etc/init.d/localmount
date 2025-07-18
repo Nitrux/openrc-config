@@ -9,8 +9,6 @@ depend() {
 	need root
 	# Must run after non-root filesystems are checked
 	need fsck
-	# This service provides the 'localmount' virtual dependency
-	provide localmount
 }
 
 start() {

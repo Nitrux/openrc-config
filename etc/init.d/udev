@@ -10,8 +10,6 @@ pidfile="/run/udev.pid"
 depend() {
 	# udev needs the /dev, /proc, and /sys filesystems to be mounted
 	need dev procfs sysfs
-	# It provides the 'udev' virtual service
-	provide udev
 }
 
 # Function to check prerequisites before starting

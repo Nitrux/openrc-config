@@ -8,8 +8,6 @@ depend() {
 	# 'need' with no arguments tells OpenRC to try to start this service
 	# after all other services in this runlevel have been started.
 	need
-	# This provides the 'local' virtual service.
-	provide local
 }
 
 start() {

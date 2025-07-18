@@ -7,8 +7,6 @@ description="Mounts the /sys virtual filesystem"
 depend() {
 	# Needs /proc to be mounted first to check for filesystem support.
 	need procfs
-	# This script provides the 'sysfs' virtual service.
-	provide sysfs
 }
 
 start() {

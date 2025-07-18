@@ -7,8 +7,6 @@ description="Manages the /dev filesystem and its sub-filesystems"
 depend() {
 	# Needs /proc and /sys to be mounted first
 	need procfs sysfs
-	# This script provides the 'dev' virtual service
-	provide dev
 }
 
 start() {

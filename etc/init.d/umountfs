@@ -4,14 +4,6 @@
 
 description="Unmounts all non-essential filesystems"
 
-depend() {
-	# The 'after *' directive ensures this service runs after all
-	# other services in the shutdown runlevel have stopped.
-	after *
-	# This provides the 'umountfs' virtual service.
-	provide umountfs
-}
-
 start() {
 	# This script only has a 'stop' action, which runs at shutdown.
 	return 0
