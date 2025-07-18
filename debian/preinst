@@ -23,13 +23,81 @@
 #############################################################################################################################################################################
 
 
-# -- Remove whatever is currently in the runlevels to ensure a clean state.
-# -- This prevents stale links from previous installations.
 
-/bin/rm -f /etc/runlevels/default/* \
-           /etc/runlevels/shutdown/* \
-           /etc/runlevels/boot/* \
-           /etc/runlevels/sysinit/*
+# -- Clear all runlevels to ensure a clean state.
+
+rm -f /etc/runlevels/default/* \
+    /etc/runlevels/shutdown/* \
+    /etc/runlevels/boot/* \
+    /etc/runlevels/sysinit/*
+
+
+# -- Whitelist of init scripts used in runlevels.
+
+used_services=(
+    apparmor-openrc
+    acpi-support-openrc
+    acpid-openrc
+    bcm-drv
+    bluetooth-meshd-openrc
+    bluetooth-obexd-openrc
+    bluetooth-openrc
+    bootlogs
+    bootmisc
+    brightness
+    cgroups
+    configfs
+    cron-openrc
+    cryptmount
+    dbus-openrc
+    debugfs
+    dev
+    device-mapper
+    dmcrypt
+    dmeventd
+    elogind-openrc
+    fsck
+    greetd
+    hostname
+    hwclock
+    local
+    localmount
+    modules
+    mountbinds
+    netmount
+    network-manager
+    nohang-desktop-openrc
+    ntpsec-openrc
+    nvidia-powerd
+    plymouth-openrc
+    power-profiles-daemon-openrc
+    powertop
+    procfs
+    rapl-power
+    root
+    rsyslog-openrc
+    savecache
+    sudo
+    swap
+    swclock
+    sysctl
+    sysfs
+    thp-settings
+    udev
+    umountfs
+    urandom
+    usbmuxd
+)
+
+
+# -- Delete all other files in /etc/init.d.
+
+for f in "${INIT_D_DIR}"/*; do
+  fname="$(basename "$f")"
+  if [[ ! " ${used_services[*]} " =~ ${fname} ]]; then
+    /bin/rm -f "$f"
+  fi
+done
 
 
 # -- Create custom runlevel "async" directory if it doesn't exist and stack it to default.
@@ -37,95 +105,53 @@
 mkdir -p /etc/runlevels/async && rc-update -s add async default
 
 
-# -- Add services to the appropriate runlevels using rc-update.
+# -- Define the base directory for init scripts.
 
-echo "Adding OpenRC services to runlevels..."
-
-# -------------------------------------------------------------------------------------------------------------------------------------------------#
-# ## System Initialization (sysinit)                                                                                                               #
-# -- These services run first to prepare the base system (mounting /proc, /sys, /dev, starting udev, etc.).                                        #
-# -------------------------------------------------------------------------------------------------------------------------------------------------#
-rc-update add apparmor-openrc sysinit
-rc-update add bootmisc sysinit
-rc-update add cgroups sysinit
-rc-update add dev sysinit
-rc-update add hostname sysinit
-rc-update add modules sysinit
-rc-update add procfs sysinit
-rc-update add sysctl sysinit
-rc-update add sysfs sysinit
-rc-update add udev sysinit
+INIT_D_DIR="/etc/init.d"
 
 
-# -------------------------------------------------------------------------------------------------------------------------------------------------#
-# ## Boot-time Services (boot)                                                                                                                     #
-# -- These services run after sysinit to mount filesystems, load seeds, etc.                                                                       #
-# -------------------------------------------------------------------------------------------------------------------------------------------------#
-rc-update add bootlogs boot
-rc-update add brightness boot
-rc-update add configfs boot
-rc-update add cryptmount boot
-rc-update add device-mapper boot
-rc-update add dmcrypt boot
-rc-update add dmeventd boot
-rc-update add fsck boot
-rc-update add localmount boot
-rc-update add root boot
-rc-update add swap boot
-rc-update add swclock boot
-rc-update add urandom boot
+# -----------------------------------------------------------------------------
+# ## System Initialization (sysinit)
+# -----------------------------------------------------------------------------
+echo "Populating sysinit runlevel..."
+
+cp "${INIT_D_DIR}"/{apparmor-openrc,bootmisc,cgroups,dev,hostname,modules,procfs,sysctl,sysfs,udev} /etc/runlevels/sysinit/
 
 
-# -------------------------------------------------------------------------------------------------------------------------------------------------#
-# ## Main Services (default)                                                                                                                       #
-# -- These are the standard, user-facing services that run in a normal multi-user session.                                                         #
-# -------------------------------------------------------------------------------------------------------------------------------------------------#
-rc-update add acpi-support-openrc default
-rc-update add acpid-openrc default
-rc-update add dbus-openrc default
-rc-update add debugfs default
-rc-update add elogind-openrc default
-rc-update add greetd default
-rc-update add local default
-rc-update add mountbinds default
-rc-update add netmount default
-rc-update add network-manager default
-rc-update add nohang-desktop-openrc default
-rc-update add ntpsec-openrc default
-rc-update add plymouth-openrc default
-rc-update add power-profiles-daemon-openrc default
-rc-update add powertop default
-rc-update add sudo default
-rc-update add uuidd default
+# -----------------------------------------------------------------------------
+# ## Boot-time Services (boot)
+# -----------------------------------------------------------------------------
+echo "Populating boot runlevel..."
+
+cp "${INIT_D_DIR}"/{bootlogs,brightness,configfs,cryptmount,device-mapper,dmcrypt,dmeventd,fsck,localmount,root,swap,swclock,urandom} /etc/runlevels/boot/
 
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------#
-# ## Asynchronous Services (async)                                                                                                                #
-# -- A custom runlevel for services that can start in the background.                                                                             #
-# ------------------------------------------------------------------------------------------------------------------------------------------------#
-rc-update add bcm-drv async
-rc-update add bluetooth-meshd-openrc async
-rc-update add bluetooth-obexd-openrc async
-rc-update add bluetooth-openrc async
-rc-update add cron-openrc async
-rc-update add nvidia-powerd async
-rc-update add rapl-power async
-rc-update add rsyslog-openrc async
-rc-update add thp-settings async
-rc-update add usbmuxd async
+# -----------------------------------------------------------------------------
+# ## Main Services (default)
+# -----------------------------------------------------------------------------
+echo "Populating default runlevel..."
+
+cp "${INIT_D_DIR}"/{acpi-support-openrc,acpid-openrc,dbus-openrc,debugfs,elogind-openrc,greetd,local,mountbinds,netmount,network-manager,nohang-desktop-openrc,ntpsec-openrc,plymouth-openrc,power-profiles-daemon-openrc,powertop,sudo,uuidd} /etc/runlevels/default/
 
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------- #
-# ## Shutdown Services (shutdown)                                                                                                                   #
-# -- These services have `stop()` actions that run when the system is halting or rebooting.                                                         #
-# ------------------------------------------------------------------------------------------------------------------------------------------------- #
-rc-update add brightness shutdown
-rc-update add hwclock shutdown
-rc-update add savecache shutdown
-rc-update add umountfs shutdown
-rc-update add urandom shutdown
+# -----------------------------------------------------------------------------
+# ## Asynchronous Services (async)
+# -----------------------------------------------------------------------------
+echo "Populating async runlevel..."
+
+cp "${INIT_D_DIR}"/{bcm-drv,bluetooth-meshd-openrc,bluetooth-obexd-openrc,bluetooth-openrc,cron-openrc,nvidia-powerd,rapl-power,rsyslog-openrc,thp-settings,usbmuxd} /etc/runlevels/async/
 
 
-# -- Rebuild the dependency tree after making all changes.
+# -----------------------------------------------------------------------------
+# ## Shutdown Services (shutdown)
+# -----------------------------------------------------------------------------
+echo "Populating shutdown runlevel..."
 
-rc-update
+cp "${INIT_D_DIR}"/{brightness,hwclock,savecache,umountfs,urandom} /etc/runlevels/async/
+
+# -----------------------------------------------------------------------------
+# ## Rebuild the dependency tree for the boot order to be correct.
+# -----------------------------------------------------------------------------
+echo "Rebuilding OpenRC dependency cache..."
+
+rc-update -u
