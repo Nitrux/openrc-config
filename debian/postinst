@@ -118,6 +118,7 @@ rc-update add dmeventd boot
 rc-update add fsck boot
 rc-update add localmount boot
 rc-update add root boot
+rc-update add rsyslog-openrc boot
 rc-update add swap boot
 rc-update add swclock boot
 rc-update add urandom boot
@@ -156,7 +157,6 @@ rc-update add bluetooth-obexd-openrc async
 rc-update add bluetooth-openrc async
 rc-update add cron-openrc async
 rc-update add rapl-power async
-rc-update add rsyslog-openrc async
 rc-update add thp-settings async
 rc-update add usbmuxd async
 
