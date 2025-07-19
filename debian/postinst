@@ -155,7 +155,6 @@ rc-update add bluetooth-meshd-openrc async
 rc-update add bluetooth-obexd-openrc async
 rc-update add bluetooth-openrc async
 rc-update add cron-openrc async
-rc-update add nvidia-powerd async
 rc-update add rapl-power async
 rc-update add rsyslog-openrc async
 rc-update add thp-settings async
