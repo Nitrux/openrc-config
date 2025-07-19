@@ -1,3 +1,9 @@
+openrc-config (0.8.8)  nitrux; urgency=high
+
+  * Move eudev service to its own package.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Fri, 18 Jul 2025 17:07:00 -0500
+
 openrc-config (0.8.7)  nitrux; urgency=high
 
   * Move eudev service to its own package.
