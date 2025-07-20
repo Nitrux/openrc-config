@@ -1,0 +1,22 @@
+#!/sbin/openrc-run
+
+description="Sets the console keyboard layout"
+
+depend() {
+	need sysfs procfs
+	before root fsck
+	provide keymap
+}
+
+start_pre() {
+	if [ ! -x /lib/console-setup/keyboard-setup.sh ]; then
+		eerror "/lib/console-setup/keyboard-setup.sh not found."
+		return 1
+	fi
+}
+
+start() {
+	ebegin "Setting up console keyboard layout"
+	/lib/console-setup/keyboard-setup.sh
+	eend $?
+}
