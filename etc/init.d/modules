@@ -3,21 +3,17 @@
 description="Loads specified kernel modules"
 
 depend() {
-	# Need /dev to be available for device nodes
 	need dev
-	# Run before most other services
 	before local
 }
 
 start() {
-	# Silently exit if the kernel does not support modules or modprobe is missing
 	if [ ! -f /proc/modules ] || [ ! -x /sbin/modprobe ]; then
 		return 0
 	fi
 
 	ebegin "Loading kernel modules"
 
-	# 1. Load modules specified in the 'modules' variable in the config file
 	if [ -n "${modules}" ]; then
 		for module in ${modules}; do
 			veinfo "Loading module ${module} (from conf.d)"
@@ -25,7 +21,6 @@ start() {
 		done
 	fi
 
-	# 2. Load modules from /etc/modules, ignoring comments and blank lines
 	if [ -f /etc/modules ]; then
 		sed -e 's/#.*//' /etc/modules | while read -r module args; do
 			if [ -n "${module}" ]; then
@@ -35,7 +30,6 @@ start() {
 		done
 	fi
 
-	# 3. Load modules from all .conf files in /etc/modules-load.d/
 	if [ -d /etc/modules-load.d ]; then
 		for file in /etc/modules-load.d/*.conf; do
 			[ -f "${file}" ] || continue
@@ -49,9 +43,4 @@ start() {
 	fi
 
 	eend 0 "Failed to load one or more modules"
-}
-
-stop() {
-	einfo "Unloading modules is not supported by this script."
-	return 0
 }

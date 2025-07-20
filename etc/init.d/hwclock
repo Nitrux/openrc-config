@@ -3,31 +3,23 @@
 description="Manages the hardware clock (RTC)"
 
 depend() {
-	# This service needs access to /dev when stopping
-	need dev
+	need localmount
+	before shutdown
+	keyword -vserver
 }
 
 start() {
-	# Per the original script, setting the system clock from the RTC
-	# at boot is handled by other means (like a udev rule).
-	# This 'start' action is intentionally a no-op.
-	einfo "System clock is synchronized at boot by other means (e.g., udev)."
+	einfo "Skipping RTC sync at boot: assumed handled by udev, NTP, or initramfs"
 	return 0
 }
 
 stop() {
-	# This action saves the system time to the hardware clock. It is
-	# typically run from the 'shutdown' runlevel by setting
-	# clock_systohc="YES" in the configuration file.
-	if ! yesno "${clock_systohc}"; then
+	if ! yesno "${clock_systohc:-yes}"; then
 		einfo "Not saving system clock to hardware clock (see /etc/conf.d/hwclock)."
 		return 0
 	fi
 
 	ebegin "Saving system clock to the hardware clock"
-
-	# Options like --utc or --localtime are set in the config file
-	eval /sbin/hwclock --systohc ${clock_opts}
-
+	/sbin/hwclock --systohc ${clock_opts:---utc}
 	eend $?
 }

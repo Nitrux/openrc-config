@@ -138,7 +138,7 @@ rc-update add local default
 rc-update add mountbinds default
 rc-update add netmount default
 rc-update add network-manager default
-rc-update add nohang-desktop-openrc default
+rc-update add nohang-openrc default
 rc-update add ntpsec-openrc default
 rc-update add plymouth-openrc default
 rc-update add power-profiles-daemon default

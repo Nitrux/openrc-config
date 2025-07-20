@@ -3,50 +3,31 @@
 description="Miscellaneous cleanup and setup during boot"
 
 depend() {
-	# SysV script required $remote_fs, which corresponds to 'net' in OpenRC.
 	need net
-	# SysV script had 'Should-Start: udev'
 	use udev
 }
 
 start() {
 	ebegin "Performing miscellaneous boot-time tasks"
 
-	# If login delaying is enabled, create the /run/nologin file.
-	# On OpenRC systems, DELAYLOGIN is typically configured in /etc/rc.conf.
 	case "${DELAYLOGIN}" in
 		Y*|y*)
 			echo "System bootup in progress - please wait" > /run/nologin
 			;;
 	esac
 
-	# Remove bootclean's flag files, same as in the original script.
 	rm -f /tmp/.clean /run/.clean /run/lock/.clean
 	rm -f /tmp/.tmpfs /run/.tmpfs /run/lock/.tmpfs
 
-	# Truncate and set permissions for the utmp file.
-	# On modern systems, /var/run is a symlink to /run.
 	local utmp='/run/utmp'
 	if ! truncate -s 0 "${utmp}"; then
-		# If truncation fails, report the error and exit.
 		eend 1 "Failed to truncate ${utmp}"
 		return 1
 	fi
 
 	chgrp utmp "${utmp}"
 	chmod 664  "${utmp}"
-	# Run restorecon for SELinux if the command exists.
 	[ -x /sbin/restorecon ] && /sbin/restorecon "${utmp}"
 
 	eend $? "Failed to perform all boot-time tasks"
-}
-
-stop() {
-	# This is a one-shot script, there is nothing to stop.
-	return 0
-}
-
-restart() {
-	# Restarting just means running the start action again.
-	start
 }

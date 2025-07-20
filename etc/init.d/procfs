@@ -2,23 +2,14 @@
 
 description="Mounts the /proc virtual filesystem"
 
-# This provides the 'procfs' virtual service.
-# It has no dependencies and should be one of the first services to run.
 provide procfs
 
 start() {
 	ebegin "Mounting /proc filesystem"
 
-	# The mountinfo command is an OpenRC helper to check if a path is mounted.
 	if ! mountinfo -q /proc; then
-		# Mount /proc with standard security options
 		mount -t proc -o "nodev,noexec,nosuid" proc /proc
 	fi
 
 	eend $?
-}
-
-stop() {
-	# Unmounting is handled globally by the 'umountfs' shutdown service.
-	return 0
 }

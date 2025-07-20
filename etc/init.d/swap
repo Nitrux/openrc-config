@@ -3,9 +3,7 @@
 description="Activates and deactivates swap partitions and files"
 
 depend() {
-	# Swap files may live on other filesystems
 	after localmount
-	# The root service must run first
 	need root
 }
 

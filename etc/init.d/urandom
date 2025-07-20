@@ -4,55 +4,44 @@ description="Saves and restores the kernel's random seed"
 random_seed_file="/var/lib/urandom/random-seed"
 
 depend() {
-	# Need local filesystems to read/write the seed file
 	need localmount
+	provide random-seed
 }
 
-# This function calculates the size of the kernel's entropy pool in bytes.
-_get_pool_bytes() {
-	local poolsize
-	poolsize=$(cat /proc/sys/kernel/random/poolsize 2>/dev/null)
-	if [ -n "${poolsize}" ]; then
-		echo $(( (poolsize + 7) / 8 ))
-	else
-		# Fallback to a safe default if /proc is unavailable
-		echo 512
-	fi
-}
+_save_seed() {
+	local pool_bytes
+	pool_bytes=$(cat /proc/sys/kernel/random/poolsize 2>/dev/null)
+	# Default to 512 bytes if poolsize can't be read
+	pool_bytes=${pool_bytes:-4096}
 
-# This function loads the seed file and immediately saves a new one.
-_load_and_refresh_seed() {
-	local pool_bytes=$(_get_pool_bytes)
-
-	# Seed the RNG with the current time and the saved seed file.
-	# This subshell ensures all output is piped to urandom at once.
-	(
-		date +%s.%N
-		[ -f "${random_seed_file}" ] && cat "${random_seed_file}"
-	) > /dev/urandom
-
-	# Immediately save a new seed to prevent reuse.
-	# This is a critical security measure.
 	umask 077
-	dd if=/dev/urandom of="${random_seed_file}" bs="${pool_bytes}" count=1 >/dev/null 2>&1
-	eend $?
+	dd if=/dev/urandom of="${random_seed_file}" bs=$(( (pool_bytes + 7) / 8 )) count=1 status=none
+}
+
+start_pre() {
+	[ -c /dev/urandom ] || return 0
+
+	checkpath --directory --owner root:root --mode 0700 "$(dirname "${random_seed_file}")"
 }
 
 start() {
-	[ -c /dev/urandom ] || return 0
-
 	ebegin "Initializing random number generator"
-	mkdir -p "$(dirname "${random_seed_file}")"
-	_load_and_refresh_seed
+	if [ -f "${random_seed_file}" ]; then
+		cat "${random_seed_file}" > /dev/urandom
+	fi
+	if _save_seed; then
+		eend 0
+	else
+		eend 1 "Failed to save new random seed"
+	fi
 }
 
 stop() {
 	[ -c /dev/urandom ] || return 0
-
 	ebegin "Saving random seed"
-	# Save a new seed on shutdown to carry entropy over to the next boot.
-	local pool_bytes=$(_get_pool_bytes)
-	umask 077
-	dd if=/dev/urandom of="${random_seed_file}" bs="${pool_bytes}" count=1 >/dev/null 2>&1
-	eend $?
+	if _save_seed; then
+		eend 0
+	else
+		eend 1 "Failed to save random seed"
+	fi
 }

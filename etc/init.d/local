@@ -3,23 +3,21 @@
 description="Runs local startup and shutdown scripts"
 
 depend() {
-	# 'need' with no arguments tells OpenRC to try to start this service
-	# after all other services in this runlevel have been started.
-	need
+	# shellcheck disable=SC2035
+	after *
 }
 
 start() {
 	ebegin "Running local startup scripts"
-	local SCRIPT
 
-	# Modern OpenRC method: run all executable *.start scripts
 	if [ -d /etc/local.d ]; then
 		for SCRIPT in /etc/local.d/*.start; do
-			[ -f "${SCRIPT}" ] && [ -x "${SCRIPT}" ] && "${SCRIPT}"
+			if [ -f "${SCRIPT}" ] && [ -x "${SCRIPT}" ]; then
+				"${SCRIPT}"
+			fi
 		done
 	fi
 
-	# Compatibility for the traditional /etc/rc.local file
 	if [ -x /etc/rc.local ]; then
 		veinfo "Running compatibility script /etc/rc.local"
 		/etc/rc.local
@@ -30,16 +28,16 @@ start() {
 
 stop() {
 	ebegin "Running local shutdown scripts"
-	local SCRIPT
 
-	# Modern OpenRC method: run all executable *.stop scripts in reverse order
 	if [ -d /etc/local.d ]; then
-		for SCRIPT in $(find /etc/local.d/ -maxdepth 1 -type f -name "*.stop" | sort -r); do
-			[ -x "${SCRIPT}" ] && "${SCRIPT}"
+		find /etc/local.d/ -maxdepth 1 -type f -name "*.stop" | sort -r | \
+		while IFS= read -r SCRIPT; do
+			if [ -x "${SCRIPT}" ]; then
+				"${SCRIPT}"
+			fi
 		done
 	fi
 
-	# Compatibility for a shutdown script
 	if [ -x /etc/rc.shutdown ]; then
 		veinfo "Running compatibility script /etc/rc.shutdown"
 		/etc/rc.shutdown

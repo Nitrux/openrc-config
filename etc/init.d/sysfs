@@ -3,40 +3,30 @@
 description="Mounts the /sys virtual filesystem"
 
 depend() {
-	# Needs /proc to be mounted first to check for filesystem support.
 	need procfs
 }
 
 start() {
 	ebegin "Mounting /sys filesystem and its subsystems"
 
-	# 1. Mount /sys
 	if ! mountinfo -q /sys; then
 		mount -t sysfs -o "nodev,noexec,nosuid" sysfs /sys
 	fi
 
-	# 2. Mount securityfs if supported by the kernel
 	if [ -d /sys/kernel/security ] && ! mountinfo -q /sys/kernel/security; then
 		if grep -q -w securityfs /proc/filesystems; then
 			mount -t securityfs securityfs /sys/kernel/security
 		fi
 	fi
 
-	# 3. Mount pstore for persistent storage if available
 	if [ -d /sys/fs/pstore ] && ! mountinfo -q /sys/fs/pstore; then
 		mount -t pstore pstore /sys/fs/pstore
 	fi
 
-	# 4. Mount efivarfs for UEFI systems if available
 	local efivarsmnt="/sys/firmware/efi/efivars"
 	if [ -d "${efivarsmnt}" ] && ! mountinfo -q "${efivarsmnt}"; then
 		mount -t efivarfs efivarfs "${efivarsmnt}"
 	fi
 
 	eend $?
-}
-
-stop() {
-	# Unmounting is handled globally by the 'umountfs' shutdown service.
-	return 0
 }

@@ -1,13 +1,7 @@
-# /etc/conf.d/hwclock
+# Save the system clock to the hardware clock on shutdown?
+clock_systohc="YES"
 
-# Set to "YES" to set the system clock from the RTC on boot.
-clock_hctosys="YES"
-
-# Set your hardware clock's timezone here.
-# For a hardware clock storing UTC time (recommended), use:
-# clock_opts="--utc"
-#
-# For a hardware clock storing local time (for dual-booting with Windows), use:
-# clock_opts="--localtime"
-#
+# Hardware clock is in UTC or local time.
+# To use UTC, set clock_opts="--utc"
+# To use local time, set clock_opts="--localtime"
 clock_opts="--utc"

@@ -3,16 +3,13 @@
 description="Sets the system hostname"
 
 depend() {
-	# Must be set before any networking services start.
 	before net
 }
 
 start() {
-	# By default, the hostname is read from the 'hostname' variable
-	# set in /etc/conf.d/hostname.
+	# shellcheck disable=SC2154
 	local new_hostname="${hostname}"
 
-	# If the variable is not set, fall back to reading /etc/hostname.
 	if [ -z "${new_hostname}" ] && [ -s /etc/hostname ]; then
 		new_hostname=$(head -n 1 /etc/hostname)
 	fi
@@ -22,17 +19,6 @@ start() {
 		hostname "${new_hostname}"
 		eend $?
 	else
-		# This is not an error, as the hostname may be set by other means (e.g., DHCP).
 		einfo "Hostname is not configured in /etc/conf.d/hostname or /etc/hostname"
 	fi
-}
-
-stop() {
-	# This is a one-shot script, there is nothing to stop.
-	return 0
-}
-
-restart() {
-	# Restarting simply means re-applying the hostname.
-	start
 }

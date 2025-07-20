@@ -3,13 +3,10 @@
 description="Checks and remounts the root filesystem read-write"
 
 depend() {
-	# We need the /dev filesystem populated
 	need dev
-	# This service must run before non-root fsck, other mounts, and swap
 	before fsck localmount swap
 }
 
-# Handles fsck failure by dropping to a maintenance shell or rebooting.
 _handle_fsck_failure() {
 	local FSCKCODE=$1
 	local reason=""
@@ -37,27 +34,22 @@ _handle_fsck_failure() {
 		sleep 5
 	fi
 
-	# Force reboot
 	reboot -f
 }
 
 start() {
-	# To get a login shell before boot, set rc_sulogin="yes" in /etc/rc.conf
 	if yesno "${rc_sulogin}"; then
 		sulogin -t 30 "$(get_boot_tty)"
 	fi
 
 	local rootcheck=true
 
-	# --- Conditions for skipping the filesystem check ---
 
-	# Skip if initramfs already ran fsck
 	if [ -e /run/initramfs/fsck-root ]; then
 		einfo "Root filesystem was already checked in the initramfs."
 		rootcheck=false
 	fi
 
-	# Skip for fast boot (rc_fast_boot="yes" in /etc/rc.conf)
 	if yesno "${rc_fast_boot}"; then
 		[ "${rootcheck}" = "true" ] && einfo "Fast boot enabled, skipping root fsck."
 		rootcheck=false
@@ -69,14 +61,11 @@ start() {
 		rootcheck=false
 	fi
 
-	# --- Perform the filesystem check ---
 
 	if [ "${rootcheck}" = "true" ]; then
 		ebegin "Checking the root filesystem"
 
 		local force_flag=""
-		# The -f flag is only for ext* filesystems.
-		# Set rc_force_fsck="yes" in /etc/rc.conf to force a check.
 		case "$(findmnt -n -o FSTYPE /)" in
 			ext*)
 				if [ -f /forcefsck ] || yesno "${rc_force_fsck}"; then
@@ -85,33 +74,26 @@ start() {
 				;;
 		esac
 
-		# Set rc_fsck_fix="yes" in /etc/rc.conf to automatically say "yes" to repairs.
-		local fix_flag="-a" # Default: fix safely
+		local fix_flag="-a"
 		if yesno "${rc_fsck_fix}"; then
 			fix_flag="-y" # Fix aggressively
 		fi
 
-		# Check the root filesystem. The system is still read-only at this point.
-		fsck -T ${fix_flag} ${force_flag} /
+		fsck -T "$fix_flag" $force_flag /
 		local FSCKCODE=$?
 
-		# Handle fsck exit code
 		if [ ${FSCKCODE} -gt 1 ]; then
 			eend 1 "fsck exited with code ${FSCKCODE}"
 			_handle_fsck_failure ${FSCKCODE}
 		else
-			# Exit code 0 (no errors) or 1 (errors corrected) are success
 			eend 0
 		fi
 	fi
-
-	# --- Finalize root filesystem ---
 
 	ebegin "Remounting root filesystem read-write"
 	mount -o remount,rw /
 	eend $?
 
-	# Migrate /etc/mtab to a symlink if it isn't one already
 	if [ ! -L /etc/mtab ]; then
 		rm -f /etc/mtab.tmp
 		if ln -s /proc/mounts /etc/mtab.tmp; then
@@ -119,11 +101,5 @@ start() {
 		fi
 	fi
 
-	# Clean up trigger files
 	rm -f /fastboot /forcefsck 2>/dev/null
-}
-
-stop() {
-	# This is a one-shot script, there is nothing to stop.
-	return 0
 }

@@ -2,19 +2,16 @@
 
 description="Starts the UUID generation daemon"
 command="/usr/sbin/uuidd"
-pidfile="/run/uuidd/uuidd.pid"
+command_args="-F"
+supervisor=supervise-daemon
 
-# The daemon should run as a dedicated user for security.
 command_user="uuidd:uuidd"
 
 depend() {
-	# Needs local filesystems to be mounted.
-	need localmount
+    need localmount
 }
 
 start_pre() {
-	# The checkpath command is an OpenRC helper to create directories
-	# with the correct owner and permissions if they don't exist.
-	checkpath -d -m 0755 -o "${command_user}" /run/uuidd
-	checkpath -d -m 0755 -o "${command_user}" /var/lib/libuuid
+    checkpath -d -m 0755 -o "${command_user}" /run/uuidd
+    checkpath -d -m 0755 -o "${command_user}" /var/lib/libuuid
 }

@@ -2,17 +2,9 @@
 
 description="Unmounts all non-essential filesystems"
 
-start() {
-	# This script only has a 'stop' action, which runs at shutdown.
-	return 0
-}
-
 stop() {
 	ebegin "Unmounting filesystems"
 
-	# Unmount all filesystems (-a) except for network filesystems
-	# (which are handled by their own services) and kernel virtual
-	# filesystems. The -r flag attempts to remount read-only on failure.
 	umount -a -r -t "nonfs,nfs4,smbfs,cifs,ncp,ncpfs,coda,ocfs2,gfs,gfs2,ceph"
 
 	eend $?

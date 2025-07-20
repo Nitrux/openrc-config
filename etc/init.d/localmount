@@ -3,32 +3,22 @@
 description="Mounts local filesystems"
 
 depend() {
-	# Must run after the root filesystem is checked and remounted rw
 	need root
-	# Must run after non-root filesystems are checked
 	need fsck
 }
 
 start() {
-	# Set LANG for correct filename encoding with certain filesystems like ntfs-3g
 	if [ -r /etc/default/locale ]; then
+	# shellcheck source=/dev/null
 		. /etc/default/locale
 		export LANG
 	fi
 
 	ebegin "Mounting local filesystems"
 
-	# The -O no_netdev option tells mount to only mount filesystems
-	# that do NOT have the _netdev option in /etc/fstab. This prevents
-	# it from trying to mount network shares (NFS, Samba, etc.) too early.
-	# The list of excluded types is for further safety.
 	mount -a -t nonfs,nfs4,smbfs,cifs,ncp,ncpfs,coda,ocfs2,gfs,gfs2,ceph \
 		-O no_netdev
 
 	eend $?
 }
 
-stop() {
-	# Unmounting is handled by the 'umountfs' shutdown service.
-	return 0
-}

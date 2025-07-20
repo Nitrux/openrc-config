@@ -3,27 +3,19 @@
 description="Sets the system clock from the hardware clock"
 
 depend() {
-	# Needs the hwclock service to be available, which provides the command
-	# and ensures /dev is ready.
-	need hwclock
-	# Must run before services that rely on accurate time.
-	before
+    need localmount
+    provide sysclock
+    before net
+    keyword -vserver
 }
 
 start() {
-	# Check if we should set the clock at all (can be disabled in conf.d)
-	if ! yesno "${clock_hctosys}"; then
-		einfo "Not setting system clock from hardware clock (see /etc/conf.d/hwclock)."
-		return 0
-	fi
+    if ! yesno "${clock_hctosys:-yes}"; then
+        einfo "Not setting system clock from hardware clock."
+        return 0
+    fi
 
-	ebegin "Setting system clock from the hardware clock"
-	# The --hctosys option sets the system time from the hardware clock.
-	# Other options like --utc or --localtime are passed in from conf.d.
-	eval /sbin/hwclock --hctosys ${clock_opts}
-	eend $?
-}
-
-stop() {
-	return 0
+    ebegin "Setting system clock from the hardware clock"
+    /usr/sbin/hwclock --hctosys ${clock_opts:---utc}
+    eend $?
 }
