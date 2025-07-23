@@ -1,3 +1,9 @@
+openrc-config (0.9.2)  nitrux; urgency=high
+
+  * Do not add a 7th TTY.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Wed, 23 Jul 2025 10:31:00 -0500
+
 openrc-config (0.9.1)  nitrux; urgency=high
 
   * Add console-setup and keyboard-setup.
