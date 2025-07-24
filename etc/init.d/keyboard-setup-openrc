@@ -9,14 +9,14 @@ depend() {
 }
 
 start_pre() {
-	if [ ! -x /lib/console-setup/keyboard-setup.sh ]; then
-		eerror "/lib/console-setup/keyboard-setup.sh not found."
+	if [ ! -x /usr/usr/lib/console-setup/keyboard-setup.sh ]; then
+		eerror "/usr/lib/console-setup/keyboard-setup.sh not found."
 		return 1
 	fi
 }
 
 start() {
 	ebegin "Setting up console keyboard layout"
-	/lib/console-setup/keyboard-setup.sh
+	/usr/lib/console-setup/keyboard-setup.sh
 	eend $?
 }

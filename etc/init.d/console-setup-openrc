@@ -4,11 +4,12 @@ description="Sets the console font and keymap"
 
 depend() {
 	need localmount
+	before agetty
 	provide console-setup
 }
 
 start_pre() {
-	if [ ! -x /bin/setupcon ]; then
+	if [ ! -x /usr/bin/setupcon ]; then
 		eerror "setupcon not found, cannot configure console."
 		return 1
 	fi

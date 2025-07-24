@@ -1,3 +1,9 @@
+openrc-config (0.9.4)  nitrux; urgency=high
+
+  * Make console-setup service starts after agetty.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Thu, 24 Jul 2025 04:21:00 -0500
+
 openrc-config (0.9.3)  nitrux; urgency=high
 
   * Use the virtual names for the services.
