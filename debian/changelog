@@ -1,3 +1,9 @@
+openrc-config (0.9.5)  nitrux; urgency=high
+
+  * Use sddm instead of greetd.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Thu, 24 Jul 2025 22:56:00 -0500
+
 openrc-config (0.9.4)  nitrux; urgency=high
 
   * Make console-setup service starts after agetty.
