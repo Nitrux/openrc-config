@@ -9,7 +9,7 @@ depend() {
 }
 
 start_pre() {
-	if [ ! -x /usr/usr/lib/console-setup/keyboard-setup.sh ]; then
+	if [ ! -x /usr/lib/console-setup/keyboard-setup.sh ]; then
 		eerror "/usr/lib/console-setup/keyboard-setup.sh not found."
 		return 1
 	fi

@@ -1,5 +1,11 @@
 openrc-config (0.9.5)  nitrux; urgency=high
 
+  * Fix typo in keybard-setup-openrc.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Fri, 25 Jul 2025 03:28:00 -0500
+
+openrc-config (0.9.5)  nitrux; urgency=high
+
   * Use sddm instead of greetd.
 
  -- Uri Herrera <uri_herrera@nxos.org>  Thu, 24 Jul 2025 22:56:00 -0500
