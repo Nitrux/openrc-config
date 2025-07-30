@@ -1,4 +1,4 @@
-#!/sbin/openrc-run
+#!/usr/sbin/openrc-run
 
 description="Miscellaneous cleanup and setup during boot"
 
@@ -27,7 +27,7 @@ start() {
 
 	chgrp utmp "${utmp}"
 	chmod 664  "${utmp}"
-	[ -x /sbin/restorecon ] && /sbin/restorecon "${utmp}"
+	[ -x /usr/sbin/restorecon ] && /usr/sbin/restorecon "${utmp}"
 
 	eend $? "Failed to perform all boot-time tasks"
 }

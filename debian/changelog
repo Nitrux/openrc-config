@@ -1,3 +1,10 @@
+openrc-config (0.9.6)  nitrux; urgency=high
+
+  * Fix restorecon path bootmisc.
+  * Add package dependency.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Wed, 26 Jul 2025 16:30:00 -0500
+
 openrc-config (0.9.5)  nitrux; urgency=high
 
   * Fix typo in keybard-setup-openrc.
