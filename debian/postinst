@@ -133,7 +133,7 @@ rc-update add acpid-openrc default
 rc-update add dbus-openrc default
 rc-update add debugfs default
 rc-update add elogind-openrc default
-rc-update add sddm-openrc default
+rc-update add greetd-openrc default
 rc-update add local default
 rc-update add mountbinds default
 rc-update add netmount default
