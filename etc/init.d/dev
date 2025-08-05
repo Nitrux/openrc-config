@@ -9,11 +9,14 @@ depend() {
 start() {
 	ebegin "Mounting the /dev filesystem"
 
-	if ! mount -t devtmpfs -o mode=0755,nosuid devtmpfs /dev; then
-		eend 1 "Failed to mount /dev"
-		return 1
+	if ! mountinfo -q /dev && grep -q devtmpfs /proc/filesystems; then
+		if ! mount -t devtmpfs -o mode=0755,nosuid devtmpfs /dev; then
+			eend 1 "Failed to mount /dev"
+			return 1
+		fi
 	fi
 
+	ln -sf /proc/self/fd /dev/fd
 	ln -sf /proc/self/fd/0 /dev/stdin
 	ln -sf /proc/self/fd/1 /dev/stdout
 	ln -sf /proc/self/fd/2 /dev/stderr
@@ -22,6 +25,7 @@ start() {
 		mkdir -p /dev/pts
 		chmod 0755 /dev/pts
 	fi
+
 	if ! mountinfo -q /dev/pts; then
 		mount -t devpts -o noexec,nosuid,gid=5,mode=620 devpts /dev/pts
 	fi
@@ -30,9 +34,11 @@ start() {
 		mkdir -p /dev/shm
 		chmod 1777 /dev/shm
 	fi
+
 	if ! mountinfo -q /dev/shm; then
 		mount -t tmpfs -o nodev,nosuid,noexec tmpfs /dev/shm
 	fi
+
 	chmod 1777 /dev/shm
 
 	eend 0
