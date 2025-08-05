@@ -1,3 +1,9 @@
+openrc-config (0.9.8)  nitrux; urgency=high
+
+  * Fix dev.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Mon, 04 Aug 2025 23:00:00 -0500
+
 openrc-config (0.9.7)  nitrux; urgency=high
 
   * Fix dev.
