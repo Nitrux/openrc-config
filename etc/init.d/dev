@@ -9,12 +9,9 @@ depend() {
 start() {
 	ebegin "Mounting the /dev filesystem"
 
-	if ! mountinfo -q /dev && grep -q devtmpfs /proc/filesystems; then
-		mount -t devtmpfs -o mode=0755,nosuid devtmpfs /dev
-		if [ $? -ne 0 ]; then
-			eend 1 "Failed to mount /dev"
-			return 1
-		fi
+	if ! mount -t devtmpfs -o mode=0755,nosuid devtmpfs /dev; then
+		eend 1 "Failed to mount /dev"
+		return 1
 	fi
 
 	ln -sf /proc/self/fd /dev/fd
@@ -40,4 +37,4 @@ start() {
 	chmod 1777 /dev/shm
 
 	eend 0
-	}
+}
