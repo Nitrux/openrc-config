@@ -18,9 +18,9 @@ start() {
 	fi
 
 	ln -sf /proc/self/fd /dev/fd
-	ln -sf fd/0 /dev/stdin
-	ln -sf fd/1 /dev/stdout
-	ln -sf fd/2 /dev/stderr
+	ln -sf /proc/self/fd/0 /dev/stdin
+	ln -sf /proc/self/fd/1 /dev/stdout
+	ln -sf /proc/self/fd/2 /dev/stderr
 
 	if [ ! -d /dev/pts ]; then
 		mkdir -p /dev/pts
@@ -30,11 +30,14 @@ start() {
 		mount -t devpts -o noexec,nosuid,gid=5,mode=620 devpts /dev/pts
 	fi
 
+	if [ ! -d /dev/shm ]; then
+		mkdir -p /dev/shm
+		chmod 1777 /dev/shm
+	fi
 	if ! mountinfo -q /dev/shm; then
 		mount -t tmpfs -o nodev,nosuid,noexec tmpfs /dev/shm
 	fi
-	# Set sticky bit for shared memory.
 	chmod 1777 /dev/shm
 
 	eend 0
-}
+	}
