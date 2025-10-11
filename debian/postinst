@@ -163,6 +163,7 @@ rc-update add rapl-power async
 rc-update add thp-settings async
 rc-update add usbmuxd async
 rc-update add fprintd default
+rc-update add rngd-openrc default
 
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------- #
