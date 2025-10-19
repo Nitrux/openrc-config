@@ -155,14 +155,11 @@ rc-update add polkitd-openrc default
 # -- A custom runlevel for services that can start in the background.                                                                             #
 # ------------------------------------------------------------------------------------------------------------------------------------------------#
 rc-update add bcm-drv async
-rc-update add bluetooth-meshd-openrc async
-rc-update add bluetooth-obexd-openrc async
 rc-update add bluetooth-openrc async
 rc-update add cron-openrc async
 rc-update add rapl-power async
 rc-update add thp-settings async
 rc-update add usbmuxd async
-rc-update add fprintd default
 rc-update add rngd-openrc default
 
 
