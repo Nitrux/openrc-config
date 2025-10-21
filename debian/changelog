@@ -1,3 +1,9 @@
+openrc-config (1.0.4)  nitrux; urgency=high
+
+  * Remove polkitd, D-Bus should start it.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Tue, 21 Oct 2025 01:25:00 -0500
+
 openrc-config (1.0.3)  nitrux; urgency=high
 
   * Remove meshd and obexd from async runlevel.
