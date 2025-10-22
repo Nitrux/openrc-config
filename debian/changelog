@@ -6,7 +6,7 @@ openrc-config (1.0.7)  nitrux; urgency=high
 
 openrc-config (1.0.6)  nitrux; urgency=high
 
-  * Add autocpuset.
+  * Add cpuset-balance.
 
  -- Uri Herrera <uri_herrera@nxos.org>  Tue, 21 Oct 2025 18:59:00 -0500
 
