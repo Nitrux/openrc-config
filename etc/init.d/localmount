@@ -3,8 +3,7 @@
 description="Mounts local filesystems"
 
 depend() {
-	need root
-	need fsck
+	need root fsck
 }
 
 start() {

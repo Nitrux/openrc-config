@@ -1,3 +1,9 @@
+openrc-config (1.0.8)  nitrux; urgency=high
+
+  * Use more concise styling when declaring service dependencies.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Wed, 22 Oct 2025 13:52:00 -0500
+
 openrc-config (1.0.7)  nitrux; urgency=high
 
   * Add ananicy-cpp.
