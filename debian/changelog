@@ -1,3 +1,9 @@
+openrc-config (1.0.6)  nitrux; urgency=high
+
+  * Add autocpuset.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Tue, 21 Oct 2025 18:59:00 -0500
+
 openrc-config (1.0.5)  nitrux; urgency=high
 
   * Add irq-pin.

@@ -123,6 +123,7 @@ rc-update add swap boot
 rc-update add swclock boot
 rc-update add urandom boot
 rc-update add irq-pin boot
+rc-update add autocpuset boot
 
 
 # -------------------------------------------------------------------------------------------------------------------------------------------------#
