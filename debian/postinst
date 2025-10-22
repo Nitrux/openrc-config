@@ -161,7 +161,8 @@ rc-update add cron-openrc async
 rc-update add rapl-power async
 rc-update add thp-settings async
 rc-update add usbmuxd async
-rc-update add rngd-openrc default
+rc-update add rngd-openrc async
+rc-update add ananicy-cpp async
 
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------- #
