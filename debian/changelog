@@ -1,3 +1,9 @@
+openrc-config (1.0.9)  nitrux; urgency=high
+
+  * Add eudev-rules-refresh.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Thu, 23 Oct 2025 02:06:00 -0500
+
 openrc-config (1.0.8)  nitrux; urgency=high
 
   * Use more concise styling when declaring service dependencies.

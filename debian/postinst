@@ -163,6 +163,7 @@ rc-update add thp-settings async
 rc-update add usbmuxd async
 rc-update add rngd-openrc async
 rc-update add ananicy-cpp async
+rc-update add eudev-rules-refresh async
 
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------- #
