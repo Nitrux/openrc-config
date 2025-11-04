@@ -90,7 +90,7 @@ echo "Adding OpenRC services to runlevels..."
 
 # -------------------------------------------------------------------------------------------------------------------------------------------------#
 # ## System Initialization (sysinit)                                                                                                               #
-# -- These services run first to prepare the base system (mounting /proc, /sys, /dev, starting eudev, etc.).                                        #
+# -- These services run first to prepare the base system (mounting /proc, /sys, /dev, starting eudev, etc.).                                       #
 # -------------------------------------------------------------------------------------------------------------------------------------------------#
 rc-update add apparmor-openrc sysinit
 rc-update add bootmisc sysinit
