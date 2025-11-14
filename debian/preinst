@@ -31,6 +31,6 @@ rm -f /etc/runlevels/default/* \
     /etc/runlevels/sysinit/*
 
 
-# -- Create custom runlevel "async" directory if it doesn't exist and stack it to default.
+# -- Create custom runlevel "async" directory if it doesn't exist and stack it to the default runlevel.
 
 mkdir -p /etc/runlevels/async && rc-update -s add async default

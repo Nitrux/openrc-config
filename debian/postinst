@@ -131,19 +131,13 @@ rc-update add urandom boot
 rc-update add acpi-support-openrc default
 rc-update add acpid-openrc default
 rc-update add dbus-openrc default
-rc-update add debugfs default
 rc-update add elogind-openrc default
 rc-update add greetd-openrc default
 rc-update add local default
 rc-update add mountbinds default
 rc-update add netmount default
 rc-update add network-manager default
-rc-update add nohang-openrc default
-rc-update add ntpsec-openrc default
 rc-update add plymouth-openrc default
-rc-update add power-profiles-daemon default
-rc-update add powertop default
-rc-update add sudo-openrc default
 rc-update add uuid default
 rc-update add console-setup-openrc default
 rc-update add keyboard-setup-openrc default
@@ -162,6 +156,12 @@ rc-update add usbmuxd async
 rc-update add rngd-openrc async
 rc-update add ananicy-cpp async
 rc-update add eudev-rules-refresh async
+rc-update add debugfs default
+rc-update add ntpsec-openrc default
+rc-update add nohang-openrc default
+rc-update add power-profiles-daemon default
+rc-update add powertop default
+rc-update add sudo-openrc default
 
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------- #
