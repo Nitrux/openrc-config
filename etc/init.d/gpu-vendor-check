@@ -3,20 +3,21 @@
 description="Nitrux GPU and ISO compatibility check"
 
 depend() {
+    need localmount
     before greetd-openrc
 }
 
 start() {
     iso_flavor=""
     if [ -f /etc/iso-release ]; then
-        branch=$(grep -i '^ISO_BRANCH=' /etc/iso-release 2>/dev/null | head -n1 | cut -d= -f2)
+        if grep -q "=" /etc/iso-release; then
+            branch=$(grep -i '^ISO_BRANCH=' /etc/iso-release 2>/dev/null | head -n1 | cut -d= -f2)
+        else
+            branch=$(cat /etc/iso-release)
+        fi
         case "$branch" in
-            nvopen|NVOPEN)
-                iso_flavor="nvidia"
-                ;;
-            mesa|MESA)
-                iso_flavor="mesa"
-                ;;
+            nvopen|NVOPEN) iso_flavor="nvidia" ;;
+            mesa|MESA)     iso_flavor="mesa" ;;
         esac
     fi
 
@@ -31,6 +32,7 @@ start() {
     fi
 
     gpu_vendor="unknown"
+    has_nvidia="no"
 
     for dev in /sys/bus/pci/devices/*; do
         class=$(cat "$dev/class" 2>/dev/null)
@@ -38,49 +40,69 @@ start() {
             0x030000|0x030200|0x0300*|0x0302*)
                 vid=$(cat "$dev/vendor" 2>/dev/null)
                 case "$vid" in
-                    0x10de)
+                    0x10de) 
                         gpu_vendor="nvidia"
-                        break
-                        ;;
-                    0x8086)
-                        gpu_vendor="intel"
-                        ;;
-                    0x1002)
-                        gpu_vendor="amd"
-                        ;;
+                        has_nvidia="yes" 
+                        break ;;
+                    0x8086) gpu_vendor="intel" ;;
+                    0x1002) gpu_vendor="amd" ;;
                 esac
                 ;;
         esac
     done
+    
+    if [ "$has_nvidia" = "yes" ]; then
+        gpu_vendor="nvidia"
+    fi
+
+    halt_system() {
+        reason="$1"
+        solution="$2"
+        detected="$3"
+
+        if command -v plymouth >/dev/null 2>&1; then
+            plymouth --quit
+        fi
+
+        chvt 1
+        exec >/dev/tty1 2>&1
+
+        clear
+        printf '\n\n'
+        printf '%s\n' "================================================================="
+        printf '%s\n' "    CRITICAL ERROR: NITRUX RELEASE MISMATCH"
+        printf '%s\n' "================================================================="
+        printf '\n'
+        printf '%s\n' "REASON: $reason"
+        printf '%s\n' "DETECTED GPU: $detected"
+        printf '\n'
+        printf '%s\n' "SOLUTION: $solution"
+        printf '\n'
+        printf '%s\n' "The system will now halt in 10 seconds..."
+        printf '%s\n' "================================================================="
+        
+        sleep 10
+        
+        reboot
+        
+        echo 1 > /proc/sys/kernel/sysrq
+        echo b > /proc/sysrq-trigger
+        
+        while :; do sleep 1; done
+    }
 
     if [ "$iso_flavor" = "nvidia" ] && [ "$gpu_vendor" != "nvidia" ] && [ "$gpu_vendor" != "unknown" ]; then
-        clear >/dev/console 2>&1
-        printf '%s\n' "=================================================================" >/dev/console
-        printf '%s\n' "NITRUX RELEASE MISMATCH: NVIDIA ISO ON NON-NVIDIA GPU" >/dev/console
-        printf '%s\n' "=================================================================" >/dev/console
-        printf '%s\n' "This release is intended for systems with an NVIDIA GPU only." >/dev/console
-        printf '%s\n' "Detected GPU vendor: $gpu_vendor" >/dev/console
-        printf '%s\n' "Use 'nitrux-contemporary-liquorix-mesa' for Intel or AMD graphics." >/dev/console
-        printf '%s\n' "The system will now halt." >/dev/console
-        printf '%s\n' "=================================================================" >/dev/console
-        sleep 10
-        reboot -f
-        while :; do sleep 3600; done
+        halt_system \
+            "NVIDIA-Optimized ISO running on Non-NVIDIA Hardware." \
+            "You MUST use the 'contemporary-liquorix-mesa' ISO." \
+            "$gpu_vendor"
     fi
 
     if [ "$iso_flavor" = "mesa" ] && [ "$gpu_vendor" = "nvidia" ]; then
-        clear >/dev/console 2>&1
-        printf '%s\n' "=================================================================" >/dev/console
-        printf '%s\n' "NITRUX RELEASE MISMATCH: MESA ISO ON NVIDIA GPU" >/dev/console
-        printf '%s\n' "=================================================================" >/dev/console
-        printf '%s\n' "This release is intended for Intel and AMD GPUs." >/dev/console
-        printf '%s\n' "Detected GPU vendor: $gpu_vendor" >/dev/console
-        printf '%s\n' "Use 'nitrux-contemporary-cachy-nvopen' for systems with an NVIDIA GPU." >/dev/console
-        printf '%s\n' "The system will now halt." >/dev/console
-        printf '%s\n' "=================================================================" >/dev/console
-        sleep 10
-        reboot -f
-        while :; do sleep 3600; done
+            halt_system \
+            "Standard (Mesa) ISO running on NVIDIA Hardware." \
+            "You MUST use the 'contemporary-cachy-nvopen' ISO." \
+            "$gpu_vendor"
     fi
 
     return 0
