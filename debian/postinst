@@ -141,6 +141,7 @@ rc-update add plymouth-openrc default
 rc-update add uuid default
 rc-update add console-setup-openrc default
 rc-update add keyboard-setup-openrc default
+rc-update add gpu-vendor-check default
 
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------#

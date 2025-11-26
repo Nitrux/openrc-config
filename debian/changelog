@@ -1,6 +1,6 @@
 openrc-config (1.1.1)  nitrux; urgency=high
 
-  * Add service to determine branch of system .
+  * Add service to determine branch of system.
 
  -- Uri Herrera <uri_herrera@nxos.org>  Tue, 04 Nov 2025 14:27:00 -0500
 
