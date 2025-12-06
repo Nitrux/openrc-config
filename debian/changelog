@@ -1,3 +1,9 @@
+openrc-config (1.1.3)  nitrux; urgency=high
+
+  * Remove gpu-vendor-check from this package.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Sat, 06 Dec 2025 07:55:00 -0500
+
 openrc-config (1.1.2)  nitrux; urgency=high
 
   * Update gpu-vendor-check.
