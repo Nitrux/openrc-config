@@ -1,3 +1,9 @@
+openrc-config (1.1.4)  nitrux; urgency=high
+
+  * Add firewalld-openrc.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Sun, 07 Dec 2025 01:39:00 -0500
+
 openrc-config (1.1.3)  nitrux; urgency=high
 
   * Remove gpu-vendor-check from this package.
