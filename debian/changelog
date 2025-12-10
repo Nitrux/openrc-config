@@ -1,3 +1,9 @@
+openrc-config (1.1.5)  nitrux; urgency=high
+
+  * Add dnscrypt-proxy.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Tue, 09 Dec 2025 22:19:00 -0500
+
 openrc-config (1.1.4)  nitrux; urgency=high
 
   * Add firewalld-openrc.
