@@ -125,6 +125,7 @@ rc-update add keyboard-setup-openrc default
 rc-update add gpu-vendor-check default
 rc-update add firewalld-openrc default
 rc-update add dnscrypt-proxy default
+rc-update add scx-synamic-scheduler default
 
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------#

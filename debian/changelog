@@ -1,3 +1,9 @@
+openrc-config (1.1.6)  nitrux; urgency=high
+
+  * Add scx-synamic-scheduler.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Fri, 19 Dec 2025 22:26:00 -0500
+
 openrc-config (1.1.5)  nitrux; urgency=high
 
   * Add dnscrypt-proxy.
