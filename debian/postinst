@@ -117,7 +117,7 @@ rc-update add greetd-openrc default
 rc-update add local default
 rc-update add mountbinds default
 rc-update add netmount default
-rc-update add network-manager default
+rc-update add network-manager-openrc default
 rc-update add plymouth-openrc default
 rc-update add uuid default
 rc-update add console-setup-openrc default
