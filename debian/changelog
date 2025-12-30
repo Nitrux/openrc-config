@@ -1,3 +1,9 @@
+openrc-config (1.1.8)  nitrux; urgency=high
+
+  * Add amd-x3d-vcache-optimizer to boot.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Tue, 30 Dec 2025 15:14:00 -0500
+
 openrc-config (1.1.7)  nitrux; urgency=high
 
   * Specify adding the service network-manager-openrc.
