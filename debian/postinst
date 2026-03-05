@@ -148,6 +148,7 @@ rc-update add nohang-openrc default
 rc-update add power-profiles-daemon default
 rc-update add powertop default
 rc-update add sudo-openrc default
+rc-update add rtkit-openrc default
 
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------#

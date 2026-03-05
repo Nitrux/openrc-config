@@ -1,3 +1,9 @@
+openrc-config (1.1.9)  nitrux; urgency=high
+
+  * Add rtkit-openrc to default.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Wed, 04 Feb 2026 22:15:00 -0500
+
 openrc-config (1.1.8)  nitrux; urgency=high
 
   * Add amd-x3d-vcache-optimizer to boot.
