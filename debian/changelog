@@ -2,7 +2,7 @@ openrc-config (1.2.0)  nitrux; urgency=high
 
   * Add dmemcg-booster to default.
 
- -- Uri Herrera <uri_herrera@nxos.org>  Sat, 15 May 2026 12:46:00 -0500
+ -- Uri Herrera <uri_herrera@nxos.org>  Sat, 16 May 2026 12:46:00 -0500
 
 openrc-config (1.1.9)  nitrux; urgency=high
 
