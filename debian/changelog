@@ -1,3 +1,9 @@
+openrc-config (1.2.1)  nitrux; urgency=high
+
+  * Handle overlay root remount failures gracefully in the root init script.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Tue, 19 May 2026 13:00:36 -0600
+
 openrc-config (1.2.0)  nitrux; urgency=high
 
   * Add dmemcg-booster to default.

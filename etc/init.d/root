@@ -91,8 +91,18 @@ start() {
 	fi
 
 	ebegin "Remounting root filesystem read-write"
-	mount -o remount,rw /
-	eend $?
+	if [ "$(findmnt -n -o FSTYPE /)" = "overlay" ]; then
+		# Overlay-based rootfs may reject remount reconfigure; keep booting.
+		# Silence expected "fsconfig() failed ... No changes allowed in reconfigure."
+		if mount -o remount,rw / 2>/dev/null; then
+			eend 0
+		else
+			eend 0 "overlay root does not support remount reconfigure, continuing boot"
+		fi
+	else
+		mount -o remount,rw /
+		eend $?
+	fi
 
 	if [ ! -L /etc/mtab ]; then
 		rm -f /etc/mtab.tmp
