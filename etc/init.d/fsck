@@ -6,6 +6,8 @@ FSCK_LOGFILE="/var/log/fsck/checkfs"
 depend() {
 	need root
 	before localmount
+	# Non-root F2FS checks can exceed OpenRC's default dependency wait window.
+	keyword -timeout
 }
 
 _handle_failed_fsck() {
