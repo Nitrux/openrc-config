@@ -1,3 +1,9 @@
+openrc-config (1.2.3)  nitrux; urgency=high
+
+  * Configure OpenRC user services for nwsm graphical session variables and per-user logging.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Sun, 06 Sep 2026 03:50:00 -0600
+
 openrc-config (1.2.2)  nitrux; urgency=high
 
   * Tell OpenRC to wait indefinitely for fsck to finish.

@@ -13,8 +13,10 @@ ln -sv /sbin/openrc-init /sbin/init
 
 sed -i 's/#rc_parallel="NO"/rc_parallel="YES"/g' /etc/rc.conf
 sed -i 's+#rc_shell=/bin/sh+rc_shell=/bin/zsh+g' /etc/rc.conf
+# Keep the system default log location implicit so user-mode OpenRC uses its
+# per-user log under XDG_STATE_HOME (or ~/.local/state) instead of /var/log.
+sed -i 's#^rc_log_path="/var/log/rc.log"#\#rc_log_path="/var/log/rc.log"#' /etc/rc.conf
 sed -i 's/#rc_logger="NO"/rc_logger="YES"/g' /etc/rc.conf
-sed -i 's+#rc_log_path="/var/log/rc.log"+rc_log_path="/var/log/rc.log"+g' /etc/rc.conf
 sed -i 's+#rc_crashed_start=YES+rc_crashed_start=YES+g' /etc/rc.conf
 sed -i 's/#unicode="NO"/unicode="YES"/g' /etc/rc.conf
 sed -i 's/#rc_send_sighup="NO"/rc_send_sighup="YES"/g' /etc/rc.conf
